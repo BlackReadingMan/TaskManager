@@ -10,7 +10,7 @@ namespace TaskManager.UserControls
   {
     public TaskUC(Task task)
     {
-      InitializeComponent();
+      this.InitializeComponent();
     }
   }
 }

@@ -1,5 +1,7 @@
 ﻿namespace DB.Models;
-
+/// <summary>
+/// Класс комментариев.
+/// </summary>
 public partial class Сommet
 {
   public int Id { get; set; }

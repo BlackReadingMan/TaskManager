@@ -1,5 +1,7 @@
 ﻿namespace DB.Models;
-
+/// <summary>
+/// Класс наблюдателя.
+/// </summary>
 public partial class Observer
 {
   public int Id { get; set; }

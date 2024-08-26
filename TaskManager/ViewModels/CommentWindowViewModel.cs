@@ -1,6 +1,8 @@
-﻿namespace TaskManager.ViewModels
+﻿using Task = DB.Models.Task;
+
+namespace TaskManager.ViewModels
 {
-  internal class CommentWindowViewModel
+  internal class CommentWindowViewModel(Task task)
   {
   }
 }

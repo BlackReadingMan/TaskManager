@@ -5,12 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager.Windows"
         xmlns:vm ="clr-namespace:TaskManager.ViewModels"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow" Height="450" Width="800"
+        Name="Window">
     <Window.DataContext>
         <vm:LoginWindowViewModel></vm:LoginWindowViewModel>
     </Window.DataContext>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"
+                                   CommandParameter="{Binding ElementName=Window}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
-        
+        <TextBox HorizontalAlignment="Center" 
+                 Margin="0,166,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding Login, Mode=OneWayToSource}" 
+                 VerticalAlignment="Top" 
+                 Width="120"/>
+        <TextBox HorizontalAlignment="Center" 
+                 Margin="0,217,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="{Binding PassWord, Mode=TwoWay}" 
+                 VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="120" Command="{Binding UserCheck}"/>
     </Grid>
 </Window>

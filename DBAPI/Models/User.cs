@@ -1,5 +1,7 @@
 ﻿namespace DB.Models;
-
+/// <summary>
+/// Класс пользователя.
+/// </summary>
 public partial class User
 {
   public int Id { get; set; }

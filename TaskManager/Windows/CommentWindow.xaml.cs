@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using TaskManager.ViewModels;
+using Task = DB.Models.Task;
 
 namespace TaskManager.Windows
 {
@@ -7,9 +9,10 @@ namespace TaskManager.Windows
   /// </summary>
   public partial class CommentWindow : Window
   {
-    public CommentWindow()
+    public CommentWindow(Task task)
     {
-      InitializeComponent();
+      this.InitializeComponent();
+      this.DataContext = new CommentWindowViewModel(task);
     }
   }
 }

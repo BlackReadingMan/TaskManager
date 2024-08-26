@@ -11,4 +11,7 @@
     <Window.DataContext>
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
+    <Grid>
+
+    </Grid>
 </Window>

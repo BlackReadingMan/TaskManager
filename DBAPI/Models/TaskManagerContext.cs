@@ -3,7 +3,9 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
 namespace DB.Models;
-
+/// <summary>
+/// Контекст базы данных.
+/// </summary>
 public partial class TaskManagerContext : DbContext
 {
   public TaskManagerContext()

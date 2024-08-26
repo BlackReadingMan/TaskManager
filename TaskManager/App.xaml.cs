@@ -10,6 +10,10 @@ namespace TaskManager
   public partial class App : Application
   {
     public static User? CurrentUser;
+    internal static void ShowError(string message)
+    {
+      MessageBox.Show(message);
+    }
     private void Application_Startup(object sender, StartupEventArgs e)
     {
       try
@@ -20,7 +24,7 @@ namespace TaskManager
       }
       finally
       {
-        Shutdown();
+        this.Shutdown();
       }
     }
   }

@@ -1,5 +1,8 @@
 ﻿namespace DB.Models;
 
+/// <summary>
+/// Класс задач.
+/// </summary>
 public partial class Task
 {
   public int Id { get; set; }

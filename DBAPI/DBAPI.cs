@@ -52,11 +52,21 @@ public static class DBAPI
     await using var context = new TaskManagerContext();
     return await context.Comments.Where(x => x.IdTask == task.Id).ToListAsync();
   }
-  public static async Task<List<Observer>> GetTaskObservers(Models.Task task)
+  public static async Task<List<User>> GetTaskObservers(Models.Task task)
   {
     await using var context = new TaskManagerContext();
-    return await context.Observers.Where(x => x.IdTask == task.Id).ToListAsync();
+    return await context.Observers.Where(x => x.IdTask == task.Id).
+      Join(context.Users, f => f.IdUser, s => s.Id,
+      (f, s) => new User
+      {
+        Name = s.Name, Email = s.Email,
+      }).ToListAsync();
+  }
 
+  public static async Task<User?> GetUser(int id)
+  {
+    await using var context = new TaskManagerContext();
+    return await context.FindAsync<User>(id);
   }
 }
 

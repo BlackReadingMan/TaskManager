@@ -47,10 +47,16 @@ public static class DBAPI
     return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password) != null;
   }
 
-  public static async Task<List<Comment>> GetTaskComments(Task task)
+  public static async Task<List<Comment>> GetTaskComments(Models.Task task)
   {
     await using var context = new TaskManagerContext();
     return await context.Comments.Where(x => x.IdTask == task.Id).ToListAsync();
+  }
+  public static async Task<List<Observer>> GetTaskObservers(Models.Task task)
+  {
+    await using var context = new TaskManagerContext();
+    return await context.Observers.Where(x => x.IdTask == task.Id).ToListAsync();
+
   }
 }
 

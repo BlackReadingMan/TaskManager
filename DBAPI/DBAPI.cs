@@ -20,11 +20,6 @@ public static class DBAPI
       table.Add(t);
   }
 
-  public static async Task<bool> CheckAuthorization(string login, string password)
-  {
-    await using var context = new TaskManagerContext();
-    return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password) != null;
-  }
   public static async Task AddItem<T>(T item) where T : class
   {
     await using var context = new TaskManagerContext();
@@ -44,6 +39,18 @@ public static class DBAPI
     await using var context = new TaskManagerContext();
     context.Remove(item);
     await context.SaveChangesAsync();
+  }
+
+  public static async Task<bool> CheckAuthorization(string login, string password)
+  {
+    await using var context = new TaskManagerContext();
+    return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password) != null;
+  }
+
+  public static async Task<List<Comment>> GetTaskComments(Task task)
+  {
+    await using var context = new TaskManagerContext();
+    return await context.Comments.Where(x => x.IdTask == task.Id).ToListAsync();
   }
 }
 

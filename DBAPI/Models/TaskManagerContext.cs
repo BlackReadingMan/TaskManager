@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
 namespace DB.Models;
+
 /// <summary>
 /// Контекст базы данных.
 /// </summary>
@@ -17,13 +18,13 @@ public partial class TaskManagerContext : DbContext
   {
   }
 
+  public virtual DbSet<Comment> Comments { get; set; }
+
   public virtual DbSet<Observer> Observers { get; set; }
 
   public virtual DbSet<Task> Tasks { get; set; }
 
   public virtual DbSet<User> Users { get; set; }
-
-  public virtual DbSet<Сommet> Сommets { get; set; }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
@@ -33,6 +34,32 @@ public partial class TaskManagerContext : DbContext
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
+    modelBuilder.Entity<Comment>(entity =>
+    {
+      entity.HasKey(e => e.IdCreator).HasName("Comment_pkey");
+
+      entity.ToTable("Comment");
+
+      entity.Property(e => e.IdCreator)
+              .ValueGeneratedNever()
+              .HasColumnName("id_creator");
+      entity.Property(e => e.Description).HasColumnName("description");
+      entity.Property(e => e.Id)
+              .ValueGeneratedOnAdd()
+              .HasColumnName("id");
+      entity.Property(e => e.IdTask).HasColumnName("id_task");
+
+      entity.HasOne(d => d.IdCreatorNavigation).WithOne(p => p.Comment)
+              .HasForeignKey<Comment>(d => d.IdCreator)
+              .OnDelete(DeleteBehavior.ClientSetNull)
+              .HasConstraintName("Comment_id_creator_fkey");
+
+      entity.HasOne(d => d.IdTaskNavigation).WithMany(p => p.Comments)
+              .HasForeignKey(d => d.IdTask)
+              .OnDelete(DeleteBehavior.ClientSetNull)
+              .HasConstraintName("Comment_id_task_fkey");
+    });
+
     modelBuilder.Entity<Observer>(entity =>
     {
       entity.HasKey(e => e.IdTask).HasName("Observer_pkey");
@@ -54,6 +81,7 @@ public partial class TaskManagerContext : DbContext
 
       entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Observers)
               .HasForeignKey(d => d.IdUser)
+              .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Observer_id_user_fkey");
     });
 
@@ -90,31 +118,6 @@ public partial class TaskManagerContext : DbContext
       entity.Property(e => e.Name).HasColumnName("name");
       entity.Property(e => e.Password).HasColumnName("password");
       entity.Property(e => e.Root).HasColumnName("root");
-    });
-
-    modelBuilder.Entity<Сommet>(entity =>
-    {
-      entity.HasKey(e => e.IdCreator).HasName("Сommet_pkey");
-
-      entity.ToTable("Сommet");
-
-      entity.Property(e => e.IdCreator)
-              .ValueGeneratedNever()
-              .HasColumnName("id_creator");
-      entity.Property(e => e.Description).HasColumnName("description");
-      entity.Property(e => e.Id)
-              .ValueGeneratedOnAdd()
-              .HasColumnName("id");
-      entity.Property(e => e.IdTask).HasColumnName("id_task");
-
-      entity.HasOne(d => d.IdCreatorNavigation).WithOne(p => p.Сommet)
-              .HasForeignKey<Сommet>(d => d.IdCreator)
-              .OnDelete(DeleteBehavior.ClientSetNull)
-              .HasConstraintName("Сommet_id_creator_fkey");
-
-      entity.HasOne(d => d.IdTaskNavigation).WithMany(p => p.Сommets)
-              .HasForeignKey(d => d.IdTask)
-              .HasConstraintName("Сommet_id_task_fkey");
     });
 
     this.OnModelCreatingPartial(modelBuilder);

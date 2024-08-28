@@ -44,10 +44,7 @@ namespace TaskManager.ViewModels
     private ICommand? _addButtonClick;
     public ICommand AddButtonClick => this._addButtonClick ??= new RelayCommand(async f =>
     {
-      var path = GetPath();
-      if (path is null) return;
-      var reportWriter = new ReportWriter(this._ucList.Select(x => x.CurrentTask));
-      reportWriter.WriteReport(path);
+      
     }, CanExecute);
     private static string? GetPath()
     {

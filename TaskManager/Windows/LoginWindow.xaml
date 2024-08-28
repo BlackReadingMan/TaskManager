@@ -26,15 +26,15 @@
                  VerticalAlignment="Top" 
                  Width="120"/>
         <TextBox HorizontalAlignment="Center" 
-                 Margin="0,235,0,0" 
+                 Margin="0,199,0,0" 
                  VerticalAlignment="Top" Width="120"
                  Text="{Binding PassWord, Mode=TwoWay}"/>
         <Button Content="Button" 
                 HorizontalAlignment="Center" 
-                Margin="0,280,0,0" 
+                Margin="0,252,0,0" 
                 VerticalAlignment="Top" 
                 Width="120" 
                 Command="{Binding UserCheck}"/>
-        
+
     </Grid>
 </Window>

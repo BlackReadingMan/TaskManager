@@ -8,7 +8,7 @@ namespace TaskManager.UserControls
   /// </summary>
   public partial class TaskUc : UserControl
   {
-    public Task CurrentTask { get; private set; }
+    public Task CurrentTask { get; }
     public TaskUc(Task task)
     {
       this.CurrentTask = task;

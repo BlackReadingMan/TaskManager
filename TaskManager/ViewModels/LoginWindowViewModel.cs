@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using TaskManager.DB;
 using TaskManager.Utilities;
 using TaskManager.Windows;
 
@@ -40,15 +41,15 @@ namespace TaskManager.ViewModels
     private ICommand? _userCheck;
     public ICommand UserCheck => this._userCheck ??= new RelayCommand(async f =>
     {
-      if (/*await DBAPI.CheckAuthorization(this._login, this._password) && this._window is not null*/ true)
+      var user = await DBAPI.CheckAuthorization(this._login, this._password);
+      if (user is not null && this._window is not null)
       {
-        this._window.DialogResult = true;
+        this._window.AuthorizedUser = user;
         this._window.Close();
       }
       else
       {
         this.PassWord = string.Empty;
-        App.ShowError("Неверный логин или пароль.");
       }
     });
     public event PropertyChangedEventHandler? PropertyChanged;

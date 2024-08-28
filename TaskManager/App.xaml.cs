@@ -9,7 +9,7 @@ namespace TaskManager
   /// </summary>
   public partial class App : Application
   {
-    public static User? CurrentUser;
+    public static User? CurrentUser { get; private set; }
     internal static void ShowError(string message)
     {
       MessageBox.Show(message);
@@ -18,8 +18,12 @@ namespace TaskManager
     {
       try
       {
-        if (new LoginWindow().ShowDialog() != true) return;
-        new MainWindow().ShowDialog();
+        var logWindow = new LoginWindow();
+        logWindow.ShowDialog();
+        CurrentUser = logWindow.AuthorizedUser;
+        if(CurrentUser is null)
+          return;
+        new MainWindow().Show();
       }
       finally
       {

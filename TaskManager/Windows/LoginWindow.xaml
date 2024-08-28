@@ -8,7 +8,8 @@
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="LoginWindow" Height="450" Width="800"
-        Name="Window">
+        Name="Window"
+        >
     <Window.DataContext>
         <vm:LoginWindowViewModel></vm:LoginWindowViewModel>
     </Window.DataContext>

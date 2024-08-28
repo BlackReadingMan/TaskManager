@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using TaskManager.DB.Models;
 
 namespace TaskManager.Windows
 {
@@ -11,5 +12,7 @@ namespace TaskManager.Windows
     {
       this.InitializeComponent();
     }
+
+    public User? AuthorizedUser { get; set; }
   }
 }

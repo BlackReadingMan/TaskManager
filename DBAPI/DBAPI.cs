@@ -45,10 +45,10 @@ public static class DBAPI
     await using var context = new TaskManagerContext();
     return await context.FindAsync<T>(id);
   }
-  public static async Task<bool> CheckAuthorization(string login, string password)
+  public static async Task<User?> CheckAuthorization(string login, string password)
   {
     await using var context = new TaskManagerContext();
-    return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password) != null;
+    return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password);
   }
 
   public static async Task<List<Comment>> GetTaskComments(Models.Task task)

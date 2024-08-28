@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace DB.Models;
+namespace TaskManager.DB.Models;
 
 /// <summary>
 /// Контекст базы данных.

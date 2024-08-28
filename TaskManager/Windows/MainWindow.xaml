@@ -11,7 +11,23 @@
     <Window.DataContext>
         <vm:MainWindowViewModel></vm:MainWindowViewModel>
     </Window.DataContext>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
+        <Button Content="Сформировать отчёт" 
+                HorizontalAlignment="Left" 
+                Margin="10,10,0,0" 
+                VerticalAlignment="Top"
+                Command="{Binding Path=ReportButtonClick}"/>
+        <Button Content="Добавить задачу" 
+                HorizontalAlignment="Left" 
+                Margin="135,10,0,0" 
+                VerticalAlignment="Top"
+                Visibility="{Binding AddButtonVisible}"
+                Command="{Binding Path=AddButtonClick}"/>
 
     </Grid>
 </Window>

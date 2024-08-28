@@ -1,4 +1,4 @@
-﻿namespace DB.Models;
+﻿namespace TaskManager.DB.Models;
 
 public partial class Task
 {

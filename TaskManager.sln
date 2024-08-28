@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35208.52
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager", "TaskManager\TaskManager.csproj", "{6C230293-48FE-4816-9C14-8EB97C8211EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB", "DBAPI\DB.csproj", "{1692E5DB-6EB2-4C90-AEC4-30221182A155}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.DB", "DBAPI\TaskManager.DB.csproj", "{1692E5DB-6EB2-4C90-AEC4-30221182A155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.DataOut", "TaskManager.DataOut\TaskManager.DataOut.csproj", "{F3B6B043-0915-4C6B-8356-23F358841C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{1692E5DB-6EB2-4C90-AEC4-30221182A155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1692E5DB-6EB2-4C90-AEC4-30221182A155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1692E5DB-6EB2-4C90-AEC4-30221182A155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B6B043-0915-4C6B-8356-23F358841C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B6B043-0915-4C6B-8356-23F358841C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B6B043-0915-4C6B-8356-23F358841C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B6B043-0915-4C6B-8356-23F358841C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,9 +1,9 @@
 using System.Collections;
-using DB.Models;
 using Microsoft.EntityFrameworkCore;
+using TaskManager.DB.Models;
 using Task = System.Threading.Tasks.Task;
 
-namespace DB;
+namespace TaskManager.DB;
 /// <summary>
 /// Класс для работы с БД.
 /// </summary>
@@ -40,7 +40,11 @@ public static class DBAPI
     context.Remove(item);
     await context.SaveChangesAsync();
   }
-
+  public static async Task<T?> GetItem<T>(int id) where T : class
+  {
+    await using var context = new TaskManagerContext();
+    return await context.FindAsync<T>(id);
+  }
   public static async Task<bool> CheckAuthorization(string login, string password)
   {
     await using var context = new TaskManagerContext();
@@ -59,14 +63,9 @@ public static class DBAPI
       Join(context.Users, f => f.IdUser, s => s.Id,
       (f, s) => new User
       {
-        Name = s.Name, Email = s.Email,
+        Name = s.Name,
+        Email = s.Email,
       }).ToListAsync();
-  }
-
-  public static async Task<User?> GetUser(int id)
-  {
-    await using var context = new TaskManagerContext();
-    return await context.FindAsync<User>(id);
   }
 }
 

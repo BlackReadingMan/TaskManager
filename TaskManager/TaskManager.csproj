@@ -17,7 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBAPI\DB.csproj" />
+    <ProjectReference Include="..\DBAPI\TaskManager.DB.csproj" />
+    <ProjectReference Include="..\TaskManager.DataOut\TaskManager.DataOut.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,17 @@
 ﻿using System.Windows.Controls;
-using Task = DB.Models.Task;
+using Task = TaskManager.DB.Models.Task;
 
 namespace TaskManager.UserControls
 {
   /// <summary>
   /// Логика взаимодействия для TaskUC.xaml
   /// </summary>
-  public partial class TaskUC : UserControl
+  public partial class TaskUc : UserControl
   {
-    public TaskUC(Task task)
+    public Task CurrentTask { get; private set; }
+    public TaskUc(Task task)
     {
+      this.CurrentTask = task;
       this.InitializeComponent();
     }
   }

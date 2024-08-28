@@ -1,4 +1,4 @@
-﻿using Task = DB.Models.Task;
+﻿using Task = TaskManager.DB.Models.Task;
 
 namespace TaskManager.ViewModels
 {

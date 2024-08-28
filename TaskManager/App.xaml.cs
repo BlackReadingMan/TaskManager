@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using DB.Models;
+using TaskManager.DB.Models;
 using TaskManager.Windows;
 
 namespace TaskManager
@@ -19,7 +19,6 @@ namespace TaskManager
       try
       {
         if (new LoginWindow().ShowDialog() != true) return;
-        MessageBox.Show("Пользователь успешно авторизован.");
         new MainWindow().ShowDialog();
       }
       finally

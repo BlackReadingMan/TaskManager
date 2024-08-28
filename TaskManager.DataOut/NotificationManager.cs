@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using DB;
+using TaskManager.DB;
+using TaskManager.DB.Models;
 using Task = System.Threading.Tasks.Task;
 
 namespace TaskManager.Utilities
@@ -43,7 +44,7 @@ namespace TaskManager.Utilities
     private static async Task NotifyResponsibleAsync(DB.Models.Task task, int newStatus, SmtpClient sc)
     {
       if (task.Responsible is null) return;
-      var user = await DBAPI.GetUser((int)task.Responsible);
+      var user = await DBAPI.GetItem<User>((int)task.Responsible);
       if (user == null) return;
       using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
       //mm.Subject = $"{Subject}";

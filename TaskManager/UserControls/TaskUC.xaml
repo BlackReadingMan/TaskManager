@@ -4,9 +4,32 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TaskManager"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Height="137" Width="473">
     <Grid>
-            
+        <Label x:Name="Name" 
+               Content="Name" 
+               HorizontalAlignment="Left" 
+               VerticalAlignment="Top" 
+               RenderTransformOrigin="0.204,-0.066"/>
+        <ComboBox x:Name="Status" 
+                  HorizontalAlignment="Left" 
+                  Margin="10,105,0,0" 
+                  VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="Description" 
+                   HorizontalAlignment="Left" 
+                   Margin="0,31,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="Description" 
+                   VerticalAlignment="Top" 
+                   Height="62" 
+                   Width="463"/>
+        <Label x:Name="CreationTime" 
+               Content="CreationTime" 
+               HorizontalAlignment="Left" 
+               Margin="397,106,0,0" 
+               VerticalAlignment="Top" 
+               Height="21" 
+               Width="66"/>
+
     </Grid>
 </UserControl>

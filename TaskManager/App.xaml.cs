@@ -21,7 +21,7 @@ namespace TaskManager
         var logWindow = new LoginWindow();
         logWindow.ShowDialog();
         CurrentUser = logWindow.AuthorizedUser;
-        if(CurrentUser is null)
+        if (CurrentUser is null)
           return;
         new MainWindow().Show();
       }

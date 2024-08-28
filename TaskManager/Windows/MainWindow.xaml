@@ -28,6 +28,8 @@
                 VerticalAlignment="Top"
                 Visibility="{Binding AddButtonVisible}"
                 Command="{Binding Path=AddButtonClick}"/>
+        <ListBox d:ItemsSource="{Binding _ucList}" 
+                 Margin="10,35,10,10"/>
 
     </Grid>
 </Window>

@@ -13,14 +13,14 @@ namespace TaskManager.UserControls
     {
       this.CurrentTask = task;
       this.InitializeComponent();
-      UpdateData();
+      this.UpdateData();
     }
 
     private void UpdateData()
     {
-      Name.Content = CurrentTask.Name;
-      Description.Text = CurrentTask.Description;
-      CreationTime.Content = CurrentTask.CreationTime;
+      this.Name.Content = this.CurrentTask.Name;
+      this.Description.Text = this.CurrentTask.Description;
+      this.CreationTime.Content = this.CurrentTask.CreationTime;
     }
   }
 }

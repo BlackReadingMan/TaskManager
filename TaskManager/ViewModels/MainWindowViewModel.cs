@@ -44,7 +44,7 @@ namespace TaskManager.ViewModels
     private ICommand? _addButtonClick;
     public ICommand AddButtonClick => this._addButtonClick ??= new RelayCommand(async f =>
     {
-      
+
     }, CanExecute);
     private static string? GetPath()
     {

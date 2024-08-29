@@ -6,7 +6,8 @@
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                        mc:Ignorable="d">
-    <Grid>
+    <!--делает ламер-->
+    <Grid Height="134" Width="934">
 
     </Grid>
 </userControls:ListedUc>

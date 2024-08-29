@@ -5,7 +5,7 @@ namespace TaskManager.UserControls;
 /// <summary>
 /// Логика взаимодействия для CommentUc.xaml
 /// </summary>
-public partial class CommentUc : ListedUc<Comment>
+public sealed partial class CommentUc : ListedUc<Comment>
 {
   public CommentUc()
   {

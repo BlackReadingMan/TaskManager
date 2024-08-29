@@ -7,7 +7,7 @@ using TaskManager.Windows;
 
 namespace TaskManager.ViewModels;
 
-internal class LoginWindowViewModel : INotifyPropertyChanged
+internal sealed class LoginWindowViewModel : BaseViewModel
 {
   private LoginWindow? _window;
 
@@ -29,15 +29,6 @@ internal class LoginWindowViewModel : INotifyPropertyChanged
       this.OnPropertyChanged();
     }
   }
-
-  private ICommand? _loadedCommand;
-  public ICommand LoadedCommand => this._loadedCommand ??= new RelayCommand(f =>
-  {
-    if (f is LoginWindow loginWindow)
-    {
-      this._window = loginWindow;
-    }
-  });
   private ICommand? _userCheck;
   public ICommand UserCheck => this._userCheck ??= new RelayCommand(async f =>
   {
@@ -52,9 +43,15 @@ internal class LoginWindowViewModel : INotifyPropertyChanged
       this.PassWord = string.Empty;
     }
   });
-  public event PropertyChangedEventHandler? PropertyChanged;
-  public void OnPropertyChanged([CallerMemberName] string prop = "")
+
+  public LoginWindowViewModel()
   {
-    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+    this._loadedCommand ??= new RelayCommand(f =>
+    {
+      if (f is LoginWindow loginWindow)
+      {
+        this._window = loginWindow;
+      }
+    });
   }
 }

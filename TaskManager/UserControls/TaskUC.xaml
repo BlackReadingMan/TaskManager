@@ -7,6 +7,7 @@
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
                        mc:Ignorable="d" Height="137" Width="473">
+    <!--делает ламер-->
     <Grid>
         <Label x:Name="Name" 
                Content="Name" 
@@ -28,10 +29,10 @@
         <Label x:Name="CreationTime" 
                Content="CreationTime" 
                HorizontalAlignment="Left" 
-               Margin="397,106,0,0" 
+               Margin="378,98,0,0" 
                VerticalAlignment="Top" 
-               Height="21" 
-               Width="66"/>
+               Height="29" 
+               Width="85"/>
 
     </Grid>
 </userControls:ListedUc>

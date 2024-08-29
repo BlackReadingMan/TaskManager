@@ -1,14 +1,13 @@
 using Xceed.Words.NET;
 using Task = TaskManager.DB.Models.Task;
 
-namespace TaskManager.DataOut
+namespace TaskManager.DataOut;
+
+public class ReportWriter(IEnumerable<Task> tasks)
 {
-  public class ReportWriter(IEnumerable<Task> tasks)
+  public void WriteReport(string path)
   {
-    public void WriteReport(string path)
-    {
-      var doc = DocX.Create(path);
-      //пишет некто сигезмунд
-    }
+    var doc = DocX.Create(path);
+    //пишет некто сигезмунд
   }
 }

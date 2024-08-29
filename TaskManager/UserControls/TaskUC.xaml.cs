@@ -5,7 +5,7 @@ namespace TaskManager.UserControls;
 /// <summary>
 /// Логика взаимодействия для TaskUC.xaml
 /// </summary>
-public partial class TaskUc : ListedUc<Task>
+public sealed partial class TaskUc : ListedUc<Task>
 {
   public TaskUc()
   {

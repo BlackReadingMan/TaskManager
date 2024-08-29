@@ -29,7 +29,7 @@
                 VerticalAlignment="Top"
                 Visibility="{Binding AddButtonVisible}"
                 Command="{Binding Path=AddButtonClick}"/>
-        <ListBox ItemsSource="{Binding Tasks}"
+        <ListBox ItemsSource="{Binding CurrentCollection}"
                  Margin="10,35,10,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>

@@ -11,7 +11,7 @@ public partial class CommentWindow : Window
 {
   public CommentWindow(Task task)
   {
-      this.InitializeComponent();
-      this.DataContext = new CommentWindowViewModel(task);
-    }
+    this.InitializeComponent();
+    this.DataContext = new CommentWindowViewModel(task);
+  }
 }

@@ -10,6 +10,7 @@
         Title="LoginWindow" Height="450" Width="800"
         Name="Window"
         >
+    <!--пишет эмиль-->
     <Window.DataContext>
         <vm:LoginWindowViewModel></vm:LoginWindowViewModel>
     </Window.DataContext>

@@ -5,9 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:TaskManager.ViewModels"
         xmlns:local="clr-namespace:TaskManager"
+        xmlns:uc="clr-namespace:TaskManager.UserControls"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="CommentWindow" Height="450" Width="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:InvokeCommandAction Command="{Binding LoadedCommand}"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
     <Grid>
-        
+        <Button Content="Добавить комментарий" 
+                HorizontalAlignment="Left" 
+                Margin="10,10,0,0" 
+                VerticalAlignment="Top"
+                Command="{Binding Path=AddButtonClick}"/>
+        <ListBox ItemsSource="{Binding Comments}"
+                 Margin="10,35,10,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <uc:CommentUc CurrentClass="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager"
         xmlns:vm ="clr-namespace:TaskManager.ViewModels"
+        xmlns:uc ="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -28,8 +29,13 @@
                 VerticalAlignment="Top"
                 Visibility="{Binding AddButtonVisible}"
                 Command="{Binding Path=AddButtonClick}"/>
-        <ListBox d:ItemsSource="{Binding _ucList}" 
-                 Margin="10,35,10,10"/>
-
+        <ListBox ItemsSource="{Binding Tasks}"
+                 Margin="10,35,10,10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <uc:TaskUc CurrentClass="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

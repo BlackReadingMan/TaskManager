@@ -8,7 +8,7 @@ namespace TaskManager.DataOut
     public void WriteReport(string path)
     {
       var doc = DocX.Create(path);
-      //написать
+      //пишет некто сигезмунд
     }
   }
 }

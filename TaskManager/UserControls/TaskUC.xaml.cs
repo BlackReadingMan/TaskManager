@@ -1,26 +1,20 @@
-﻿using System.Windows.Controls;
-using Task = TaskManager.DB.Models.Task;
+﻿using Task = TaskManager.DB.Models.Task;
 
-namespace TaskManager.UserControls
+namespace TaskManager.UserControls;
+
+/// <summary>
+/// Логика взаимодействия для TaskUC.xaml
+/// </summary>
+public partial class TaskUc : ListedUc<Task>
 {
-  /// <summary>
-  /// Логика взаимодействия для TaskUC.xaml
-  /// </summary>
-  public partial class TaskUc : UserControl
+  public TaskUc()
   {
-    public Task CurrentTask { get; }
-    public TaskUc(Task task)
-    {
-      this.CurrentTask = task;
-      this.InitializeComponent();
-      this.UpdateData();
-    }
-
-    private void UpdateData()
-    {
-      this.Name.Content = this.CurrentTask.Name;
-      this.Description.Text = this.CurrentTask.Description;
-      this.CreationTime.Content = this.CurrentTask.CreationTime;
-    }
+    this.InitializeComponent();
+  }
+  protected override void UpdateData()
+  {
+    this.Name.Content = this.CurrentClass.Name;
+    this.Description.Text = this.CurrentClass.Description;
+    this.CreationTime.Content = this.CurrentClass.CreationTime;
   }
 }

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using TaskManager.DB;
 using TaskManager.Utilities;
@@ -44,14 +43,17 @@ internal sealed class LoginWindowViewModel : BaseViewModel
     }
   });
 
-  public LoginWindowViewModel()
+  protected override Task OnLoad(object sender)
   {
-    this._loadedCommand ??= new RelayCommand(f =>
+    if (sender is LoginWindow loginWindow)
     {
-      if (f is LoginWindow loginWindow)
-      {
-        this._window = loginWindow;
-      }
-    });
+      this._window = loginWindow;
+    }
+    return Task.Delay(1);
+  }
+
+  protected override bool CanExecute(object parameter)
+  {
+    return true;
   }
 }

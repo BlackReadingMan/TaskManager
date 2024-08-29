@@ -1,4 +1,6 @@
-﻿namespace TaskManager.DB.Models;
+﻿using System.Collections.Generic;
+
+namespace TaskManager.DB.Models;
 
 /// <summary>
 /// Класс пользователя.

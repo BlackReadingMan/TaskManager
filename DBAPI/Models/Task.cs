@@ -1,4 +1,7 @@
-﻿namespace TaskManager.DB.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace TaskManager.DB.Models;
 
 public partial class Task
 {

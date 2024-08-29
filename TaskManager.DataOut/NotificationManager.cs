@@ -4,7 +4,7 @@ using TaskManager.DB;
 using TaskManager.DB.Models;
 using Task = System.Threading.Tasks.Task;
 
-namespace TaskManager.Utilities;
+namespace TaskManager.DataOut;
 
 internal static class NotificationManager
 {

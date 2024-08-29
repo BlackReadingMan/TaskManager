@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -29,7 +30,15 @@ internal sealed class MainWindowViewModel : ListViewModel<Task>
     if (path is null) return;
     var reportWriter = new ReportWriter(this.CurrentCollection);
     reportWriter.WriteReport(path);
-  }, CanExecute);
+  }, this.CanExecute);
+
+  protected override async System.Threading.Tasks.Task OnLoad(object sender)
+  {
+    var tasks = new List<Task>();
+    await DBAPI.LoadTable<Task>(tasks);
+    this.CurrentCollection = new ObservableCollection<Task>(tasks);
+  }
+
   private static string? GetPath()
   {
     var dialog = new SaveFileDialog
@@ -59,11 +68,5 @@ internal sealed class MainWindowViewModel : ListViewModel<Task>
     {
       this.AddButtonVisible = App.CurrentUser.Root ? Visibility.Visible : Visibility.Hidden;
     }
-    this._loadedCommand ??= new RelayCommand(async f =>
-    {
-      var tasks = new List<Task>();
-      await DBAPI.LoadTable<Task>(tasks);
-      this.CurrentCollection = new ObservableCollection<Task>(tasks);
-    }, CanExecute);
   }
 }

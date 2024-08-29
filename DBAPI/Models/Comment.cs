@@ -1,4 +1,6 @@
-﻿namespace TaskManager.DB.Models;
+﻿using System;
+
+namespace TaskManager.DB.Models;
 
 /// <summary>
 /// Класс комментариев.

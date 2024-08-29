@@ -1,21 +1,15 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using TaskManager.DB;
 using TaskManager.DB.Models;
-using TaskManager.Utilities;
 using Task = TaskManager.DB.Models.Task;
 
 namespace TaskManager.ViewModels;
 
-internal sealed class CommentWindowViewModel : ListViewModel<Comment>
+internal sealed class CommentWindowViewModel(Task task) : ListViewModel<Comment>
 {
-  public CommentWindowViewModel(Task task)
+  protected override async System.Threading.Tasks.Task OnLoad(object sender)
   {
-    this._loadedCommand ??= new RelayCommand(async f =>
-    {
-      var comments = await DBAPI.GetTaskComments(task);
-      this.CurrentCollection = new ObservableCollection<Comment>(comments);
-    }, CanExecute);
+    var comments = await DBAPI.GetTaskComments(task);
+    this.CurrentCollection = new ObservableCollection<Comment>(comments);
   }
 }

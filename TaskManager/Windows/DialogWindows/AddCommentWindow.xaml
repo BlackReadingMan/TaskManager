@@ -1,0 +1,27 @@
+﻿<base:DialogWindow x:TypeArguments="models:Comment" 
+                   x:Class="TaskManager.Windows.DialogWindows.AddCommentWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:local="clr-namespace:TaskManager.Windows.DialogWindows"
+                   xmlns:base="clr-namespace:TaskManager.Windows.DialogWindows"
+                   xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
+                   xmlns:vm="clr-namespace:TaskManager.ViewModels.DialogViewModels"
+                   mc:Ignorable="d"
+                   Title="AddCommentWindow" Height="148" Width="461">
+    <Window.DataContext>
+        <vm:AddCommentWindowViewModel></vm:AddCommentWindowViewModel>
+    </Window.DataContext>
+    <!--<Window.Style>
+        <Style TargetType="{x:Type base:AddCommentWindow}">
+            <Setter Property="ReturnData"
+                    Value="{Binding DialogResult}" />
+        </Style>
+    </Window.Style>-->
+    <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.--> 
+    <Grid>
+        <TextBox Text="{Binding Description, Mode=OneWayToSource}" Margin="10,10,10,48"></TextBox>
+        <Button Content="Сохранить" Command="{Binding AddButtonClick}" Margin="164,89,165,10"></Button>
+    </Grid>
+</base:DialogWindow>

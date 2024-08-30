@@ -1,4 +1,6 @@
-﻿using Task = TaskManager.DB.Models.Task;
+﻿using System.Windows.Input;
+using TaskManager.Windows.MainWindows;
+using Task = TaskManager.DB.Models.Task;
 
 namespace TaskManager.UserControls;
 
@@ -16,5 +18,10 @@ public sealed partial class TaskUc : ListedUc<Task>
     this.Name.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
+  }
+
+  private void TaskUc_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
+  {
+    new CommentWindow(this.CurrentClass).ShowDialog();
   }
 }

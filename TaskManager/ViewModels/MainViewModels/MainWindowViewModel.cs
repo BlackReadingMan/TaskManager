@@ -6,11 +6,13 @@ using Microsoft.Win32;
 using TaskManager.DataOut;
 using TaskManager.DB;
 using TaskManager.Utilities;
+using TaskManager.ViewModels.BaseViewModels;
+using TaskManager.Windows.DialogWindows;
 using Task = TaskManager.DB.Models.Task;
 
-namespace TaskManager.ViewModels;
+namespace TaskManager.ViewModels.MainViewModels;
 
-internal sealed class MainWindowViewModel : ListViewModel<Task>
+internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 {
 
   private Visibility _addButtonVisible;
@@ -32,11 +34,21 @@ internal sealed class MainWindowViewModel : ListViewModel<Task>
     reportWriter.WriteReport(path);
   }, this.CanExecute);
 
-  protected override async System.Threading.Tasks.Task OnLoad(object sender)
+  protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
     var tasks = new List<Task>();
     await DBAPI.LoadTable<Task>(tasks);
     this.CurrentCollection = new ObservableCollection<Task>(tasks);
+  }
+
+  protected override void AddSubject()
+  {
+    var window = new AddTaskWindow();
+    window.ShowDialog();
+    var task = window.ReturnData;
+    if (task is null) return;
+    this.CurrentCollection.Add(task);
+    DBAPI.AddItem(task);
   }
 
   private static string? GetPath()

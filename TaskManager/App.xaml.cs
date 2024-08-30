@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using TaskManager.DB.Models;
-using TaskManager.Windows;
+using TaskManager.Windows.DialogWindows;
+using TaskManager.Windows.MainWindows;
 
 namespace TaskManager;
 
@@ -20,7 +21,7 @@ public partial class App : Application
     {
       var logWindow = new LoginWindow();
       logWindow.ShowDialog();
-      CurrentUser = logWindow.AuthorizedUser;
+      CurrentUser = logWindow.ReturnData;
       if (CurrentUser is null)
         return;
       new MainWindow().ShowDialog();

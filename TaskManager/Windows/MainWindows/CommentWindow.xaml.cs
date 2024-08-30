@@ -1,8 +1,8 @@
 ﻿using System.Windows;
-using TaskManager.ViewModels;
+using TaskManager.ViewModels.MainViewModels;
 using Task = TaskManager.DB.Models.Task;
 
-namespace TaskManager.Windows;
+namespace TaskManager.Windows.MainWindows;
 
 /// <summary>
 /// Логика взаимодействия для CommentWindow.xaml

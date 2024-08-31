@@ -19,7 +19,7 @@ public partial class User
 
   public bool Root { get; set; }
 
-  public virtual Comment? Comment { get; set; }
+  public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
   public virtual ICollection<Observer> Observers { get; set; } = new List<Observer>();
 

@@ -23,7 +23,7 @@ public partial class Task
 
   public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
-  public virtual Observer? Observer { get; set; }
+  public virtual ICollection<Observer> Observers { get; set; } = new List<Observer>();
 
   public virtual User? ResponsibleNavigation { get; set; }
 }

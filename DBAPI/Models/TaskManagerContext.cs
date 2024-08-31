@@ -36,22 +36,18 @@ public partial class TaskManagerContext : DbContext
   {
     modelBuilder.Entity<Comment>(entity =>
     {
-      entity.HasKey(e => e.IdCreator).HasName("Comment_pkey");
+      entity.HasKey(e => e.Id).HasName("Comment_pkey");
 
       entity.ToTable("Comment");
 
-      entity.Property(e => e.IdCreator)
-              .ValueGeneratedNever()
-              .HasColumnName("id_creator");
-      entity.Property(e => e.CreationTime).HasColumnName("creationTime");
+      entity.Property(e => e.Id).HasColumnName("id");
+      entity.Property(e => e.CreationTime).HasColumnName("creation_time");
       entity.Property(e => e.Description).HasColumnName("description");
-      entity.Property(e => e.Id)
-              .ValueGeneratedOnAdd()
-              .HasColumnName("id");
+      entity.Property(e => e.IdCreator).HasColumnName("id_creator");
       entity.Property(e => e.IdTask).HasColumnName("id_task");
 
-      entity.HasOne(d => d.IdCreatorNavigation).WithOne(p => p.Comment)
-              .HasForeignKey<Comment>(d => d.IdCreator)
+      entity.HasOne(d => d.IdCreatorNavigation).WithMany(p => p.Comments)
+              .HasForeignKey(d => d.IdCreator)
               .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Comment_id_creator_fkey");
 
@@ -63,20 +59,18 @@ public partial class TaskManagerContext : DbContext
 
     modelBuilder.Entity<Observer>(entity =>
     {
-      entity.HasKey(e => e.IdTask).HasName("Observer_pkey");
+      entity.HasKey(e => e.Id).HasName("Observer_pkey");
 
       entity.ToTable("Observer");
 
-      entity.Property(e => e.IdTask)
-              .ValueGeneratedNever()
-              .HasColumnName("id_task");
-      entity.Property(e => e.Id)
-              .ValueGeneratedOnAdd()
-              .HasColumnName("id");
+      entity.HasIndex(e => new { e.IdTask, e.IdUser }, "Observer_id_task_id_user_key").IsUnique();
+
+      entity.Property(e => e.Id).HasColumnName("id");
+      entity.Property(e => e.IdTask).HasColumnName("id_task");
       entity.Property(e => e.IdUser).HasColumnName("id_user");
 
-      entity.HasOne(d => d.IdTaskNavigation).WithOne(p => p.Observer)
-              .HasForeignKey<Observer>(d => d.IdTask)
+      entity.HasOne(d => d.IdTaskNavigation).WithMany(p => p.Observers)
+              .HasForeignKey(d => d.IdTask)
               .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Observer_id_task_fkey");
 
@@ -93,7 +87,7 @@ public partial class TaskManagerContext : DbContext
       entity.ToTable("Task");
 
       entity.Property(e => e.Id).HasColumnName("id");
-      entity.Property(e => e.CreationTime).HasColumnName("creationTime");
+      entity.Property(e => e.CreationTime).HasColumnName("creation_time");
       entity.Property(e => e.Deadline).HasColumnName("deadline");
       entity.Property(e => e.Description).HasColumnName("description");
       entity.Property(e => e.Name).HasColumnName("name");

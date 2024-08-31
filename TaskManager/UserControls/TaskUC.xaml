@@ -6,7 +6,7 @@
                        xmlns:local="clr-namespace:TaskManager"
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
-                       mc:Ignorable="d" Height="137" Width="473"
+                       mc:Ignorable="d" Height="137" Width="626"
                        MouseDoubleClick="TaskUc_OnMouseDoubleClick">
     <!--делает ламер-->
     <Grid>
@@ -30,10 +30,17 @@
         <Label x:Name="CreationTime" 
                Content="CreationTime" 
                HorizontalAlignment="Left" 
-               Margin="378,98,0,0" 
+               Margin="531,98,0,0" 
                VerticalAlignment="Top" 
                Height="29" 
                Width="85"/>
+        <Button x:Name="SubscribeButton" 
+                HorizontalAlignment="Left" 
+                Margin="162,105,0,0" 
+                VerticalAlignment="Top" 
+                Height="22" 
+                Width="86" 
+                Click="SubscribeButton_Click"/>
 
     </Grid>
 </userControls:ListedUc>

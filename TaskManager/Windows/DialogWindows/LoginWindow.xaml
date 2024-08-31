@@ -14,12 +14,12 @@
     <Window.DataContext>
         <vm:LoginWindowViewModel></vm:LoginWindowViewModel>
     </Window.DataContext>
-    <!--<Window.Style>
+    <Window.Style>
         <Style TargetType="{x:Type base:LoginWindow}">
             <Setter Property="ReturnData"
                     Value="{Binding DialogResult}" />
         </Style>
-    </Window.Style>-->
+    </Window.Style>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Grid>
         <TextBox HorizontalAlignment="Center" 

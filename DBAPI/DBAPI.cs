@@ -70,5 +70,10 @@ public static class DBAPI
         Email = s.Email,
       }).ToListAsync();
   }
+  public static async Task<Observer?> IsUserObserveTask(Models.Task task, User user)
+  {
+    await using var context = new TaskManagerContext();
+    return context.Observers.FirstOrDefault(x => x.IdTask == task.Id && x.IdUser == user.Id);
+  }
 }
 

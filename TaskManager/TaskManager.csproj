@@ -21,4 +21,8 @@
     <ProjectReference Include="..\TaskManager.DataOut\TaskManager.DataOut.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Styles\" />
+  </ItemGroup>
+
 </Project>

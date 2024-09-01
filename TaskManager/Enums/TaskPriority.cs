@@ -1,6 +1,6 @@
 ﻿namespace TaskManager.Enums;
 
-internal enum TaskPriority
+public enum TaskPriority
 {
   Low = 0,
   High = 1,

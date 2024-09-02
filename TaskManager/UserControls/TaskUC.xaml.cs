@@ -25,7 +25,7 @@ public sealed partial class TaskUc : ListedUc<Task>
   {
     this._observer = await DBAPI.IsUserObserveTask(this.CurrentClass, App.CurrentUser);
     this.SubscribeButton.Content = this._observer is not null ? "Не отслеживать" : "Отслеживать";
-    this.Name.Content = this.CurrentClass.Name;
+    this.TaskName.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
     this.DeadLine.Content = this.CurrentClass.Deadline;

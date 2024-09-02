@@ -13,7 +13,7 @@
                        MouseDoubleClick="TaskUc_OnMouseDoubleClick">
     <!--делает ламер-->
     <Grid>
-        <Label x:Name="Name"
+        <Label x:Name="TaskName"
                Content="Name"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"

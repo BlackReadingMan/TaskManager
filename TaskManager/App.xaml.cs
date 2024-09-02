@@ -10,7 +10,7 @@ namespace TaskManager;
 /// </summary>
 public partial class App : Application
 {
-  public static User? CurrentUser { get; private set; }
+  public static User CurrentUser { get; private set; }
   internal static void ShowError(string message)
   {
     MessageBox.Show(message);
@@ -21,9 +21,9 @@ public partial class App : Application
     {
       var logWindow = new LoginWindow();
       logWindow.ShowDialog();
-      CurrentUser = logWindow.ReturnData;
-      if (CurrentUser is null)
+      if (logWindow.ReturnData is null)
         return;
+      CurrentUser = logWindow.ReturnData;
       new MainWindow().ShowDialog();
     }
     finally

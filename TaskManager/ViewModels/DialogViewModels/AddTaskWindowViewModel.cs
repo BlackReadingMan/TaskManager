@@ -38,9 +38,9 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     set => this._selectedPriority = value;
   }
 
-  private Dictionary<string, int> responsibleDictionary;
+  private Dictionary<string, int> _responsibleDictionary = [];
 
-  private ObservableCollection<string> _responsible;
+  private ObservableCollection<string> _responsible = [];
 
   public ObservableCollection<string> Responsible
   {
@@ -65,8 +65,8 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 
   private async System.Threading.Tasks.Task GetUsers()
   {
-    this.responsibleDictionary = await DBAPI.GetUsersLogins();
-    this.Responsible = new ObservableCollection<string>(this.responsibleDictionary.Keys);
+    this._responsibleDictionary = await DBAPI.GetUsersLogins();
+    this.Responsible = new ObservableCollection<string>(this._responsibleDictionary.Keys);
     this.Responsible.Insert(0, "Не назначен");
   }
 
@@ -78,7 +78,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
       Description = this._description,
       Deadline = this._deadLine is null ? null : DateOnly.Parse(this._deadLine),
       Priority = (TaskPriority)this._selectedPriority,
-      Responsible = this._selectedResponsible is null || !this.responsibleDictionary.TryGetValue(this._selectedResponsible, out var value) ? null : value,
+      Responsible = this._selectedResponsible is null || !this._responsibleDictionary.TryGetValue(this._selectedResponsible, out var value) ? null : value,
       Status = 0,
       CreationTime = DateOnly.FromDateTime(DateTime.Now)
     };

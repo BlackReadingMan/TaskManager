@@ -18,7 +18,7 @@ internal sealed class CommentWindowViewModel(Task task) : ListWindowViewModel<Co
     }
   }
 
-  protected override void AddSubject()
+  protected override async void AddSubject()
   {
     var window = new AddCommentWindow();
     window.ShowDialog();
@@ -26,11 +26,11 @@ internal sealed class CommentWindowViewModel(Task task) : ListWindowViewModel<Co
     if (comment is null) return;
     comment.IdTask = task.Id;
     this.CurrentCollection.Add(comment);
-    DBAPI.AddItem(comment);
+    await DBAPI.AddItem(comment);
   }
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this.CanLoadExecute(parameter);
+    return true;
   }
 }

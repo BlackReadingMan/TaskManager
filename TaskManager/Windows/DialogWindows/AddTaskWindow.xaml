@@ -82,7 +82,7 @@
                      VerticalAlignment="Center"
                      Width="322"
                      Height="36"
-                     Text="{Binding Name}" />
+                     Text="{Binding Name, Mode=OneWayToSource}" />
             <TextBox Name="DescriptionBox"
                      Grid.Column="1"
                      HorizontalAlignment="Center"
@@ -91,7 +91,7 @@
                      VerticalAlignment="Center"
                      Width="322"
                      Height="63"
-                     Text="{Binding Description}" />
+                     Text="{Binding Description, Mode=OneWayToSource}" />
             <xctk:MaskedTextBox Name="DeadLineBox"
                                 Mask="0000-00-00"
                                 FontSize="20"
@@ -102,7 +102,7 @@
                                 VerticalAlignment="Center"
                                 Width="322"
                                 Height="36"
-                                Text="{Binding DeadLine}" />
+                                Text="{Binding DeadLine, Mode=OneWayToSource}" />
             <ComboBox Name="PriorityComboBox"
                       FontSize="20"
                       Grid.Column="1"
@@ -121,7 +121,7 @@
                       Width="322"
                       Height="48"
                       ItemsSource="{Binding Responsible}"
-                      SelectedItem="{Binding SelectedResponsible}" />
+                      SelectedItem="{Binding SelectedResponsible, Mode=OneWayToSource}" />
         </Grid>
         <Button Content="Добавить"
                 FontSize="20"

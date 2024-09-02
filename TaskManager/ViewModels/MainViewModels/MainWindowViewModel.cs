@@ -14,7 +14,7 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 
   private readonly ReportWriter _reportWriter;
 
-  private Task _selectedTask;
+  private Task? _selectedTask;
 
   public Task SelectedTask
   {
@@ -26,11 +26,12 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     var path = GetPath();
     if (path is null) return;
     await this._reportWriter.WriteReport(path);
-  }, this.CanLoadExecute);
+  });
 
   private ICommand? _removeButtonClick;
   public ICommand RemoveButtonClick => this._removeButtonClick ??= new RelayCommand(async f =>
   {
+    if(_selectedTask is null) return;
     await DBAPI.RemoveItem(this._selectedTask);
     this.CurrentCollection.Remove(this._selectedTask);
   }, this.CanAddExecute);
@@ -39,19 +40,19 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     await DBAPI.LoadTable<Task>(this.CurrentCollection);
   }
 
-  protected override void AddSubject()
+  protected override async void AddSubject()
   {
     var window = new AddTaskWindow();
     window.ShowDialog();
     var task = window.ReturnData;
     if (task is null) return;
     this.CurrentCollection.Add(task);
-    DBAPI.AddItem(task);
+    await DBAPI.AddItem(task);
   }
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this.CanLoadExecute(parameter) && App.CurrentUser.Root;
+    return App.CurrentUser.Root;
   }
 
   private static string? GetPath()

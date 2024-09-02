@@ -8,7 +8,7 @@ namespace TaskManager.ViewModels.BaseViewModels;
 internal abstract class ListWindowViewModel<T> : BaseViewModel
 {
   protected ICommand? _loadCommand;
-  public ICommand LoadCommand => this._loadCommand ??= new RelayCommand(async f => await this.UpdateData(f), this.CanLoadExecute);
+  public ICommand LoadCommand => this._loadCommand ??= new RelayCommand(async f => await this.UpdateData(f));
   private ObservableCollection<T> _currentCollection = [];
   public ObservableCollection<T> CurrentCollection
   {
@@ -20,8 +20,4 @@ internal abstract class ListWindowViewModel<T> : BaseViewModel
     }
   }
   protected abstract Task UpdateData(object sender);
-  protected virtual bool CanLoadExecute(object parameter)
-  {
-    return App.CurrentUser is not null;
-  }
 }

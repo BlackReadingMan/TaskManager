@@ -45,5 +45,13 @@
                 Height="22"
                 Width="86"
                 Click="SubscribeButton_Click" />
+        <Button x:Name="StateChanger" 
+                HorizontalAlignment="Left"
+                Margin="275,105,0,0"
+                VerticalAlignment="Top"
+                Height="22"
+                Width="84"
+                Click="StateChanger_Click" 
+                IsEnabled="False"/>
     </Grid>
 </userControls:ListedUc>

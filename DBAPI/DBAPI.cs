@@ -12,7 +12,7 @@ namespace TaskManager.DB;
 /// </summary>
 public static class DBAPI
 {
-  //Scaffold-DbContext "Host=localhost;Port=5432;Database=TaskManager;Username=postgres;Password=1111" Npgsql.EntityFrameworkCore.PostgreSQL -Force -Context TaskManagerContext -OutputDir Models
+  //Scaffold-DbContext "Host=94.181.65.62;Port=5432;Database=TaskManager;Username=tasker;Password=asdfgh" Npgsql.EntityFrameworkCore.PostgreSQL -Force -Context TaskManagerContext -OutputDir Models
   public static async Task LoadTable<T>(IList table) where T : class
   {
     await using var context = new TaskManagerContext();

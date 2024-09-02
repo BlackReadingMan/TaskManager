@@ -12,7 +12,11 @@ internal sealed class CommentWindowViewModel(Task task) : ListWindowViewModel<Co
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
     var comments = await DBAPI.GetTaskComments(task);
-    this.CurrentCollection = new ObservableCollection<Comment>(comments);
+    CurrentCollection.Clear();
+    foreach (var comment in comments)
+    {
+      this.CurrentCollection.Add(comment);
+    }
   }
 
   protected override void AddSubject()

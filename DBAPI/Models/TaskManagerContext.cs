@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,12 +49,11 @@ public partial class TaskManagerContext : DbContext
 
       entity.HasOne(d => d.IdCreatorNavigation).WithMany(p => p.Comments)
               .HasForeignKey(d => d.IdCreator)
-              .OnDelete(DeleteBehavior.ClientSetNull)
+              .OnDelete(DeleteBehavior.SetNull)
               .HasConstraintName("Comment_id_creator_fkey");
 
       entity.HasOne(d => d.IdTaskNavigation).WithMany(p => p.Comments)
               .HasForeignKey(d => d.IdTask)
-              .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Comment_id_task_fkey");
     });
 
@@ -71,12 +71,10 @@ public partial class TaskManagerContext : DbContext
 
       entity.HasOne(d => d.IdTaskNavigation).WithMany(p => p.Observers)
               .HasForeignKey(d => d.IdTask)
-              .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Observer_id_task_fkey");
 
       entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Observers)
               .HasForeignKey(d => d.IdUser)
-              .OnDelete(DeleteBehavior.ClientSetNull)
               .HasConstraintName("Observer_id_user_fkey");
     });
 
@@ -97,6 +95,7 @@ public partial class TaskManagerContext : DbContext
 
       entity.HasOne(d => d.ResponsibleNavigation).WithMany(p => p.Tasks)
               .HasForeignKey(d => d.Responsible)
+              .OnDelete(DeleteBehavior.SetNull)
               .HasConstraintName("Task_responsible_fkey");
     });
 

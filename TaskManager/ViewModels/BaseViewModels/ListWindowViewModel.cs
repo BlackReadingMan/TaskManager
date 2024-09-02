@@ -9,7 +9,7 @@ internal abstract class ListWindowViewModel<T> : BaseViewModel
 {
   protected ICommand? _loadCommand;
   public ICommand LoadCommand => this._loadCommand ??= new RelayCommand(async f => await this.UpdateData(f), this.CanExecute);
-  private ObservableCollection<T> _currentCollection;
+  private ObservableCollection<T> _currentCollection = [];
   public ObservableCollection<T> CurrentCollection
   {
     get => this._currentCollection;

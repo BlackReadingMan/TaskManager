@@ -36,9 +36,7 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
-    var tasks = new List<Task>();
-    await DBAPI.LoadTable<Task>(tasks);
-    this.CurrentCollection = new ObservableCollection<Task>(tasks);
+    await DBAPI.LoadTable<Task>(CurrentCollection);
   }
 
   protected override void AddSubject()

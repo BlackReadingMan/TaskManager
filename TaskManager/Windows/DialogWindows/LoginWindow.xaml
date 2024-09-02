@@ -61,8 +61,8 @@
                     <Button Content="Регистрация"
                         HorizontalAlignment="Center"
                         Width="200"
-                        Opacity="0.6"
                         Style="{StaticResource DefaultButtonStyle}"
+                        Command="{Binding AddButtonClick}"
                          />
                 </StackPanel>
           

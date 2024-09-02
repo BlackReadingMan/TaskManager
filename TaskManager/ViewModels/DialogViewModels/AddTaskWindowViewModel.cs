@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskManager.DB.Enums;
 using TaskManager.DB.Models;
-using TaskManager.Enums;
 using TaskManager.ViewModels.BaseViewModels;
 
 namespace TaskManager.ViewModels.DialogViewModels;
@@ -48,8 +48,8 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     {
       Name = this._name,
       Description = this._description,
-      Deadline = DateOnly.Parse(this._deadLine),
-      Priority = this._selectedPriority,
+      Deadline = _deadLine is null ? null : DateOnly.Parse(this._deadLine),
+      Priority = (TaskPriority)this._selectedPriority,
       Responsible = this._selectedResponsible,
       Status = 0,
       CreationTime = DateOnly.FromDateTime(DateTime.Now)

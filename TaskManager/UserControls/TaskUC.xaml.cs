@@ -18,8 +18,8 @@ public sealed partial class TaskUc : ListedUc<Task>
   }
   protected override async void UpdateData()
   {
-    _observer = await DBAPI.IsUserObserveTask(CurrentClass, App.CurrentUser);
-    this.SubscribeButton.Content = _observer is not null ? "Не отслеживать" : "Отслеживать";
+    this._observer = await DBAPI.IsUserObserveTask(this.CurrentClass, App.CurrentUser);
+    this.SubscribeButton.Content = this._observer is not null ? "Не отслеживать" : "Отслеживать";
     this.Name.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
@@ -32,14 +32,14 @@ public sealed partial class TaskUc : ListedUc<Task>
 
   private async void SubscribeButton_Click(object sender, System.Windows.RoutedEventArgs e)
   {
-    if (_observer is not null)
+    if (this._observer is not null)
     {
-      await DBAPI.RemoveItem(_observer);
+      await DBAPI.RemoveItem(this._observer);
       this.SubscribeButton.Content = "Отслеживать";
     }
     else
     {
-      await DBAPI.AddItem(new Observer {IdTask = CurrentClass.Id, IdUser = App.CurrentUser.Id});
+      await DBAPI.AddItem(new Observer { IdTask = this.CurrentClass.Id, IdUser = App.CurrentUser.Id });
       this.SubscribeButton.Content = "Не отслеживать";
     }
   }

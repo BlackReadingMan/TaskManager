@@ -28,4 +28,9 @@ internal sealed class CommentWindowViewModel(Task task) : ListWindowViewModel<Co
     this.CurrentCollection.Add(comment);
     DBAPI.AddItem(comment);
   }
+
+  protected override bool CanAddExecute(object parameter)
+  {
+    return this.CanLoadExecute(parameter);
+  }
 }

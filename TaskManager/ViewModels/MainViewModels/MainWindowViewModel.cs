@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Microsoft.Win32;
 using TaskManager.DataOut;
 using TaskManager.DB;
@@ -14,15 +13,12 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 {
 
   private readonly ReportWriter _reportWriter;
-  private Visibility _addButtonVisible;
-  public Visibility AddButtonVisible
+
+  private Task _selectedTask;
+
+  public Task SelectedTask
   {
-    get => this._addButtonVisible;
-    set
-    {
-      this._addButtonVisible = value;
-      this.OnPropertyChanged();
-    }
+    set => _selectedTask= value;
   }
   private ICommand? _reportButtonClick;
   public ICommand ReportButtonClick => this._reportButtonClick ??= new RelayCommand(async f =>
@@ -30,8 +26,14 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     var path = GetPath();
     if (path is null) return;
     await this._reportWriter.WriteReport(path);
-  }, this.CanExecute);
+  }, this.CanLoadExecute);
 
+  private ICommand? _removeButtonClick;
+  public ICommand RemoveButtonClick => this._removeButtonClick ??= new RelayCommand(async f =>
+  {
+    await DBAPI.RemoveItem(_selectedTask);
+    CurrentCollection.Remove(_selectedTask);
+  }, this.CanAddExecute);
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
     await DBAPI.LoadTable<Task>(this.CurrentCollection);
@@ -45,6 +47,11 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     if (task is null) return;
     this.CurrentCollection.Add(task);
     DBAPI.AddItem(task);
+  }
+
+  protected override bool CanAddExecute(object parameter)
+  {
+    return this.CanLoadExecute(parameter) && App.CurrentUser.Root;
   }
 
   private static string? GetPath()
@@ -69,13 +76,5 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
   public MainWindowViewModel()
   {
     this._reportWriter = new ReportWriter(this.CurrentCollection);
-    if (App.CurrentUser is null)
-    {
-      this.AddButtonVisible = Visibility.Hidden;
-    }
-    else
-    {
-      this.AddButtonVisible = App.CurrentUser.Root ? Visibility.Visible : Visibility.Hidden;
-    }
   }
 }

@@ -85,9 +85,9 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     this.DialogResult = task;
   }
 
-  protected override bool CanExecute(object parameter)
+  protected override bool CanAddExecute(object parameter)
   {
     return this._name is not null &&
-           this._description is not null;
+           this._description is not null && App.CurrentUser is not null;
   }
 }

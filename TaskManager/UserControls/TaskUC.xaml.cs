@@ -4,6 +4,7 @@ using TaskManager.DB;
 using TaskManager.DB.Enums;
 using TaskManager.DB.Models;
 using TaskManager.Windows.MainWindows;
+using Xceed.Document.NET;
 using Task = TaskManager.DB.Models.Task;
 
 namespace TaskManager.UserControls;
@@ -20,13 +21,15 @@ public sealed partial class TaskUc : ListedUc<Task>
     this.InitializeComponent();
   }
 
-  protected override async void UpdateData()
+  protected override async System.Threading.Tasks.Task UpdateData()
   {
     this._observer = await DBAPI.IsUserObserveTask(this.CurrentClass, App.CurrentUser);
     this.SubscribeButton.Content = this._observer is not null ? "Не отслеживать" : "Отслеживать";
     this.Name.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
+    this.DeadLine.Content = this.CurrentClass.Deadline;
+    this.Status.Content = this.CurrentClass.Status.EnumDescription();
     this.SetStateChangerContent();
   }
 

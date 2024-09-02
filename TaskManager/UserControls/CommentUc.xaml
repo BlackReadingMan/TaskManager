@@ -6,8 +6,27 @@
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
-                       mc:Ignorable="d">
+                       mc:Ignorable="d"
+                       Width="545">
     <!--делает ламер-->
-    <Grid Height="134"
-          Width="934"></Grid>
+    <Grid>
+        <Label x:Name="CreatorLogin"
+               Content="CreatorLogin"
+               HorizontalAlignment="Left"
+               Margin="10,10,0,0"
+               VerticalAlignment="Top" />
+        <Label x:Name="CreationTime"
+               Content="CreationTime"
+               HorizontalAlignment="Left"
+               Margin="140,10,0,0"
+               VerticalAlignment="Top" />
+        <TextBlock x:Name="Description"
+                   HorizontalAlignment="Left"
+                   Margin="10,41,0,0"
+                   TextWrapping="Wrap"
+                   Text="Description"
+                   VerticalAlignment="Top"
+                   Height="54"
+                   Width="508" />
+    </Grid>
 </userControls:ListedUc>

@@ -30,10 +30,10 @@ public class ReportWriter(IEnumerable<TaskEntity> tasks)
           .FontSize(12)
           .SpacingAfter(10);
 
-            doc.InsertParagraph(task.Name) 
-          .FontSize(16)
-          .Bold()
-          .SpacingAfter(10);
+      doc.InsertParagraph(task.Name)
+    .FontSize(16)
+    .Bold()
+    .SpacingAfter(10);
 
       var table = doc.AddTable(9, 2);
       table.Design = TableDesign.LightShadingAccent1;
@@ -45,10 +45,10 @@ public class ReportWriter(IEnumerable<TaskEntity> tasks)
       table.Rows[1].Cells[1].Paragraphs[0].Append(task.Deadline?.ToString() ?? "Не назначен");
 
       table.Rows[2].Cells[0].Paragraphs[0].Append("Описание задачи");
-            table.Rows[2].Cells[1].Paragraphs[0].Append(task.Description); 
+      table.Rows[2].Cells[1].Paragraphs[0].Append(task.Description);
 
       table.Rows[3].Cells[0].Paragraphs[0].Append("Название задачи");
-            table.Rows[3].Cells[1].Paragraphs[0].Append(task.Name);
+      table.Rows[3].Cells[1].Paragraphs[0].Append(task.Name);
 
       table.Rows[4].Cells[0].Paragraphs[0].Append("Приоритет задачи");
       var priority = GetStringPriority(task.Priority);

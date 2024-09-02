@@ -15,10 +15,10 @@ public abstract class ListedUc<T> : UserControl
     DependencyProperty.Register(nameof(CurrentClass), typeof(T), typeof(ListedUc<T>),
       new FrameworkPropertyMetadata(CurrentClassPropertyChanged));
 
-  protected abstract void UpdateData();
-  private static void CurrentClassPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+  protected abstract System.Threading.Tasks.Task UpdateData();
+  private static async void CurrentClassPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
   {
     if (d is not ListedUc<T> listedUc) return;
-    listedUc.UpdateData();
+    await listedUc.UpdateData();
   }
 }

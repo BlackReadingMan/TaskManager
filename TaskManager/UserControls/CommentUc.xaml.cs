@@ -1,4 +1,5 @@
-﻿using TaskManager.DB.Models;
+﻿using TaskManager.DB;
+using TaskManager.DB.Models;
 
 namespace TaskManager.UserControls;
 
@@ -12,8 +13,11 @@ public sealed partial class CommentUc : ListedUc<Comment>
     this.InitializeComponent();
   }
 
-  protected override void UpdateData()
+  protected override async System.Threading.Tasks.Task UpdateData()
   {
-
+    var user = await DBAPI.GetItem<User>(this.CurrentClass.IdCreator);
+    this.CreatorLogin.Content = user is null ? "Пользователь удалён" : user.Login;
+    this.CreationTime.Content = this.CurrentClass.CreationTime;
+    this.Description.Text = this.CurrentClass.Description;
   }
 }

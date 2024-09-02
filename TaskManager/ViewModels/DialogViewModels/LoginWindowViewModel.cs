@@ -36,7 +36,7 @@ internal sealed class LoginWindowViewModel : DialogWindowViewModel<User>
 
   }
 
-  protected override bool CanExecute(object parameter)
+  protected override bool CanAddExecute(object parameter)
   {
     return true;
   }

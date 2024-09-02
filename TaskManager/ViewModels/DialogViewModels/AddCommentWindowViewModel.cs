@@ -22,8 +22,8 @@ internal class AddCommentWindowViewModel : DialogWindowViewModel<Comment>
     this.DialogResult = newComment;
   }
 
-  protected override bool CanExecute(object parameter)
+  protected override bool CanAddExecute(object parameter)
   {
-    return this._description is not null;
+    return this._description is not null && this._description != string.Empty && App.CurrentUser is not null;
   }
 }

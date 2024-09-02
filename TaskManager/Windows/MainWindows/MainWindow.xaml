@@ -29,15 +29,20 @@
                 HorizontalAlignment="Left"
                 Margin="135,10,0,0"
                 VerticalAlignment="Top"
-                Visibility="{Binding AddButtonVisible}"
                 Command="{Binding Path=AddButtonClick}" />
-        <Button Command="{Binding LoadCommand}"
-                HorizontalAlignment="Left"
+        <Button HorizontalAlignment="Left"
                 Margin="767,10,0,0"
                 VerticalAlignment="Top"
                 Width="23"
-                Height="23" />
+                Height="23"
+                Command="{Binding LoadCommand}" />
+        <Button Content="Удалить задачу"
+                HorizontalAlignment="Left"
+                Margin="237,10,0,0"
+                VerticalAlignment="Top"
+                Command="{Binding RemoveButtonClick}" />
         <ListBox ItemsSource="{Binding CurrentCollection}"
+                 SelectedItem="{Binding SelectedTask}"
                  Margin="10,35,10,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>

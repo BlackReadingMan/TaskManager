@@ -18,7 +18,7 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 
   public Task SelectedTask
   {
-    set => _selectedTask= value;
+    set => this._selectedTask = value;
   }
   private ICommand? _reportButtonClick;
   public ICommand ReportButtonClick => this._reportButtonClick ??= new RelayCommand(async f =>
@@ -31,8 +31,8 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
   private ICommand? _removeButtonClick;
   public ICommand RemoveButtonClick => this._removeButtonClick ??= new RelayCommand(async f =>
   {
-    await DBAPI.RemoveItem(_selectedTask);
-    CurrentCollection.Remove(_selectedTask);
+    await DBAPI.RemoveItem(this._selectedTask);
+    this.CurrentCollection.Remove(this._selectedTask);
   }, this.CanAddExecute);
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {

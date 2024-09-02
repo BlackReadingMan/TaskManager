@@ -15,12 +15,12 @@
     <Window.DataContext>
         <vm:AddCommentWindowViewModel></vm:AddCommentWindowViewModel>
     </Window.DataContext>
-    <!--<Window.Style>
+    <Window.Style>
         <Style TargetType="{x:Type base:AddCommentWindow}">
             <Setter Property="ReturnData"
                     Value="{Binding DialogResult}" />
         </Style>
-    </Window.Style>-->
+    </Window.Style>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Grid>
         <Grid.RowDefinitions>

@@ -24,49 +24,42 @@
     </Window.Style>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Viewbox>
-        <Grid
-            Background="Cornsilk"
-            Height="1080"
-            Width="1920"
-            >
-            <StackPanel 
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                        >
+        <Grid Background="Cornsilk"
+              Height="1080"
+              Width="1920">
+            <StackPanel
+                    HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
                 <TextBlock Text="Авторизация"
                            TextAlignment="Center"
-                           Style="{StaticResource DefaultTextBlockStyle}"
-                />
+                           Style="{StaticResource DefaultTextBlockStyle}" />
                 <TextBox HorizontalAlignment="Center"
                          TextAlignment="Left"
                          Style="{StaticResource DefaultTextBoxStyle}"
                          Margin="0 30 0 15"
-                         Text="{Binding Login, Mode=OneWayToSource}"
-                />
+                         Text="{Binding Login, Mode=OneWayToSource}" />
                 <TextBox HorizontalAlignment="Center"
                          TextAlignment="Left"
                          Margin="0 15 0 30 "
                          Style="{StaticResource DefaultTextBoxStyle}"
                          Text="{Binding PassWord, Mode=OneWayToSource}" />
             </StackPanel>
-
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 350 0 0" HorizontalAlignment="Center">
-                    <Button Content="Войти"
-                            HorizontalAlignment="Center"
-                            Margin="0 0 40 0"
-                            Width="200"
-                            Style="{StaticResource DefaultButtonStyle}"
-                            Command="{Binding UserCheck}" />
-
-                    <Button Content="Регистрация"
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Margin="0 350 0 0"
+                        HorizontalAlignment="Center">
+                <Button Content="Войти"
+                        HorizontalAlignment="Center"
+                        Margin="0 0 40 0"
+                        Width="200"
+                        Style="{StaticResource DefaultButtonStyle}"
+                        Command="{Binding UserCheck}" />
+                <Button Content="Регистрация"
                         HorizontalAlignment="Center"
                         Width="200"
                         Style="{StaticResource DefaultButtonStyle}"
-                        Command="{Binding AddButtonClick}"
-                         />
-                </StackPanel>
-          
-
+                        Command="{Binding AddButtonClick}" />
+            </StackPanel>
         </Grid>
     </Viewbox>
 </base:DialogWindow>

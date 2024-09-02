@@ -1,46 +1,49 @@
-﻿<userControls:ListedUc x:TypeArguments="models:Task" x:Class="TaskManager.UserControls.TaskUc"
+﻿<userControls:ListedUc x:TypeArguments="models:Task"
+                       x:Class="TaskManager.UserControls.TaskUc"
                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:local="clr-namespace:TaskManager"
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
-                       mc:Ignorable="d" Height="137" Width="626"
+                       mc:Ignorable="d"
+                       Height="137"
+                       Width="626"
                        MouseDoubleClick="TaskUc_OnMouseDoubleClick">
     <!--делает ламер-->
     <Grid>
-        <Label x:Name="Name" 
-               Content="Name" 
-               HorizontalAlignment="Left" 
-               VerticalAlignment="Top" 
-               RenderTransformOrigin="0.204,-0.066"/>
-        <ComboBox x:Name="Status" 
-                  HorizontalAlignment="Left" 
-                  Margin="10,105,0,0" 
-                  VerticalAlignment="Top" Width="120"/>
-        <TextBlock x:Name="Description" 
-                   HorizontalAlignment="Center" 
-                   Margin="0,31,0,0" 
-                   TextWrapping="Wrap" 
-                   Text="Description" 
-                   VerticalAlignment="Top" 
-                   Height="62" 
-                   Width="463"/>
-        <Label x:Name="CreationTime" 
-               Content="CreationTime" 
-               HorizontalAlignment="Left" 
-               Margin="531,98,0,0" 
-               VerticalAlignment="Top" 
-               Height="29" 
-               Width="85"/>
-        <Button x:Name="SubscribeButton" 
-                HorizontalAlignment="Left" 
-                Margin="162,105,0,0" 
-                VerticalAlignment="Top" 
-                Height="22" 
-                Width="86" 
-                Click="SubscribeButton_Click"/>
-
+        <Label x:Name="Name"
+               Content="Name"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               RenderTransformOrigin="0.204,-0.066" />
+        <ComboBox x:Name="Status"
+                  HorizontalAlignment="Left"
+                  Margin="10,105,0,0"
+                  VerticalAlignment="Top"
+                  Width="120" />
+        <TextBlock x:Name="Description"
+                   HorizontalAlignment="Center"
+                   Margin="0,31,0,0"
+                   TextWrapping="Wrap"
+                   Text="Description"
+                   VerticalAlignment="Top"
+                   Height="62"
+                   Width="463" />
+        <Label x:Name="CreationTime"
+               Content="CreationTime"
+               HorizontalAlignment="Left"
+               Margin="531,98,0,0"
+               VerticalAlignment="Top"
+               Height="29"
+               Width="85" />
+        <Button x:Name="SubscribeButton"
+                HorizontalAlignment="Left"
+                Margin="162,105,0,0"
+                VerticalAlignment="Top"
+                Height="22"
+                Width="86"
+                Click="SubscribeButton_Click" />
     </Grid>
 </userControls:ListedUc>

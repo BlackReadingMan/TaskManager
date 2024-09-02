@@ -1,4 +1,4 @@
-﻿<base:DialogWindow x:TypeArguments="models:Comment" 
+﻿<base:DialogWindow x:TypeArguments="models:Comment"
                    x:Class="TaskManager.Windows.DialogWindows.AddCommentWindow"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,7 +9,9 @@
                    xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                    xmlns:vm="clr-namespace:TaskManager.ViewModels.DialogViewModels"
                    mc:Ignorable="d"
-                   Title="AddCommentWindow" Height="148" Width="461">
+                   Title="AddCommentWindow"
+                   Height="158"
+                   Width="461">
     <Window.DataContext>
         <vm:AddCommentWindowViewModel></vm:AddCommentWindowViewModel>
     </Window.DataContext>
@@ -19,9 +21,17 @@
                     Value="{Binding DialogResult}" />
         </Style>
     </Window.Style>-->
-    <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.--> 
+    <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Grid>
-        <TextBox Text="{Binding Description, Mode=OneWayToSource}" Margin="10,10,10,48"></TextBox>
-        <Button Content="Сохранить" Command="{Binding AddButtonClick}" Margin="164,89,165,10"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBox Text="{Binding Description, Mode=OneWayToSource}"
+                 Margin="10,10,10,6" />
+        <Button Content="Сохранить"
+                Command="{Binding AddButtonClick}"
+                Margin="165,5,165,5"
+                Grid.Row="1" />
     </Grid>
 </base:DialogWindow>

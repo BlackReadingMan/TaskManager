@@ -1,1 +1,1 @@
-﻿Host=94.181.65.62;Port=5432;Database=TaskManager;Username=tasker;Password=asdfgh
+﻿Host=94.181.64.156;Port=5432;Database=TaskManager;Username=tasker;Password=asdfgh

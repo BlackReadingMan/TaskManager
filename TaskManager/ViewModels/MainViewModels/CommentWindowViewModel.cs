@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using TaskManager.DB;
+﻿using TaskManager.DB;
 using TaskManager.DB.Models;
 using TaskManager.ViewModels.BaseViewModels;
 using TaskManager.Windows.DialogWindows;
@@ -12,7 +11,7 @@ internal sealed class CommentWindowViewModel(Task task) : ListWindowViewModel<Co
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
     var comments = await DBAPI.GetTaskComments(task);
-    CurrentCollection.Clear();
+    this.CurrentCollection.Clear();
     foreach (var comment in comments)
     {
       this.CurrentCollection.Add(comment);

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using TaskManager.DataOut;
@@ -15,6 +13,7 @@ namespace TaskManager.ViewModels.MainViewModels;
 internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 {
 
+  private readonly ReportWriter _reportWriter;
   private Visibility _addButtonVisible;
   public Visibility AddButtonVisible
   {
@@ -26,17 +25,16 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     }
   }
   private ICommand? _reportButtonClick;
-  public ICommand ReportButtonClick => this._reportButtonClick ??= new RelayCommand(f =>
+  public ICommand ReportButtonClick => this._reportButtonClick ??= new RelayCommand(async f =>
   {
     var path = GetPath();
     if (path is null) return;
-    var reportWriter = new ReportWriter(this.CurrentCollection);
-    reportWriter.WriteReport(path);
+    await this._reportWriter.WriteReport(path);
   }, this.CanExecute);
 
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
-    await DBAPI.LoadTable<Task>(CurrentCollection);
+    await DBAPI.LoadTable<Task>(this.CurrentCollection);
   }
 
   protected override void AddSubject()
@@ -70,6 +68,7 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
 
   public MainWindowViewModel()
   {
+    this._reportWriter = new ReportWriter(this.CurrentCollection);
     if (App.CurrentUser is null)
     {
       this.AddButtonVisible = Visibility.Hidden;

@@ -6,26 +6,33 @@
         xmlns:uc="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="CommentWindow" Height="450" Width="800">
+        Title="CommentWindow"
+        Height="450"
+        Width="800">
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding LoadCommand}"/>
+            <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>
-        <Button Content="Добавить комментарий" 
-                HorizontalAlignment="Left" 
-                Margin="10,10,0,0" 
+        <Button Content="Добавить комментарий"
+                HorizontalAlignment="Left"
+                Margin="10,10,0,0"
                 VerticalAlignment="Top"
-                Command="{Binding Path=AddButtonClick}"/>
+                Command="{Binding Path=AddButtonClick}" />
         <ListBox ItemsSource="{Binding CurrentCollection}"
                  Margin="10,35,10,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <uc:CommentUc CurrentClass="{Binding}"/>
+                    <uc:CommentUc CurrentClass="{Binding}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Command="{Binding LoadCommand}" HorizontalAlignment="Left" Margin="767,10,0,0" VerticalAlignment="Top" Width="23" Height="23"/>
+        <Button Command="{Binding LoadCommand}"
+                HorizontalAlignment="Left"
+                Margin="767,10,0,0"
+                VerticalAlignment="Top"
+                Width="23"
+                Height="23" />
     </Grid>
 </Window>

@@ -19,9 +19,9 @@ public partial class User
 
   public bool Root { get; set; }
 
-  public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+  public virtual ICollection<Comment> Comments { get; set; } = [];
 
-  public virtual ICollection<Observer> Observers { get; set; } = new List<Observer>();
+  public virtual ICollection<Observer> Observers { get; set; } = [];
 
-  public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+  public virtual ICollection<Task> Tasks { get; set; } = [];
 }

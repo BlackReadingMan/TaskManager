@@ -22,9 +22,9 @@ public partial class Task
 
   public DateOnly CreationTime { get; set; }
 
-  public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+  public virtual ICollection<Comment> Comments { get; set; } = [];
 
-  public virtual ICollection<Observer> Observers { get; set; } = new List<Observer>();
+  public virtual ICollection<Observer> Observers { get; set; } = [];
 
   public virtual User? ResponsibleNavigation { get; set; }
 }

@@ -12,27 +12,36 @@ namespace TaskManager.ViewModels.DialogViewModels;
 
 internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 {
-  private string? _name;
+  private string _name = "";
+
   public string Name
   {
     set => this._name = value;
   }
-  private string? _description;
+
+  private string _description = "";
+
   public string Description
   {
     set => this._description = value;
   }
-  private string? _deadLine;
+
+  private string _deadLine = "";
+
   public string DeadLine
   {
     set => this._deadLine = value;
   }
+
   private string? _selectedResponsible;
+
   public string SelectedResponsible
   {
     set => this._selectedResponsible = value;
   }
+
   private int _selectedPriority = 0;
+
   public int SelectedPriority
   {
     set => this._selectedPriority = value;
@@ -60,6 +69,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     TaskPriority.High,
     TaskPriority.Critical
   ];
+
   private ICommand? _loadCommand;
   public ICommand LoadCommand => this._loadCommand ??= new RelayCommand(async f => await this.GetUsers());
 
@@ -76,9 +86,13 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     {
       Name = this._name,
       Description = this._description,
-      Deadline = this._deadLine is null ? null : DateOnly.Parse(this._deadLine),
+      Deadline = this._deadLine == string.Empty ? null : DateOnly.Parse(this._deadLine),
       Priority = (TaskPriority)this._selectedPriority,
-      Responsible = this._selectedResponsible is null || !this._responsibleDictionary.TryGetValue(this._selectedResponsible, out var value) ? null : value,
+      Responsible =
+        this._selectedResponsible is null ||
+        !this._responsibleDictionary.TryGetValue(this._selectedResponsible, out var value)
+          ? null
+          : value,
       Status = 0,
       CreationTime = DateOnly.FromDateTime(DateTime.Now)
     };
@@ -87,7 +101,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this._name is not null &&
-           this._description is not null && App.CurrentUser is not null;
+    return this._name == string.Empty && (this._deadLine == string.Empty || this._deadLine.Length == 8) &&
+           this._description == string.Empty;
   }
 }

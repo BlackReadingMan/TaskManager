@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManager"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:vm="clr-namespace:TaskManager.ViewModels.MainViewModels"
         xmlns:uc="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
@@ -19,6 +19,9 @@
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
+        <b:EventTrigger EventName="MouseDown">
+                <b:InvokeCommandAction Command="{Binding FilterMouseLostClick}" />
+            </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>
         <Button Content="Сформировать отчёт"
@@ -37,7 +40,7 @@
                 VerticalAlignment="Top"
                 Command="{Binding RemoveButtonClick}" />
         <Button HorizontalAlignment="Left"
-                Margin="767,7,0,0"
+                Margin="767,10,0,0"
                 VerticalAlignment="Top"
                 Width="23"
                 Height="23"
@@ -69,9 +72,105 @@
                  ItemsSource="{Binding CurrentCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <uc:TaskUc CurrentClass="{Binding}" />
+                    <StackPanel>
+                        <uc:TaskUc CurrentClass="{Binding}" />
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Expander
+                IsExpanded="{Binding IsFilterExpanded}"
+                  HorizontalAlignment="Left"
+                  Header="Фильтры"
+                  Margin="637,44,0,0"
+                  VerticalAlignment="Top"
+                  Width="153">
+            <StackPanel Background="#FFE5E5E5">
+                <Expander Header="Статус">
+                    <ListBox ItemsSource="{Binding StatusFilters}"
+                             Background="#FFE5E5E5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <CheckBox Content="{Binding Name}"
+                                              IsChecked="{Binding IsChecked}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+                <Expander Header="Приоритет">
+                    <ListBox ItemsSource="{Binding PriorityFilters}"
+                             Background="#FFE5E5E5">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <CheckBox Content="{Binding Name}"
+                                              IsChecked="{Binding IsChecked}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+                <Expander Header="Дата создания">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="От"
+                               Grid.Row="0"
+                               Grid.Column="0"></Label>
+                        <Label Content="До"
+                               Grid.Row="1"
+                               Grid.Column="0"></Label>
+                        <xctk:MaskedTextBox Grid.Row="0"
+                                            Grid.Column="1"
+                                            Mask="0000-00-00"
+                                            Text="{Binding FromCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                        <xctk:MaskedTextBox Grid.Row="1"
+                                            Grid.Column="1"
+                                            Mask="0000-00-00"
+                                            Text="{Binding ToCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                    </Grid>
+                </Expander>
+                <Expander Header="Дедлайн">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="2*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Content="От"
+                               Grid.Row="0"
+                               Grid.Column="0"></Label>
+                        <Label Content="До"
+                               Grid.Row="1"
+                               Grid.Column="0"></Label>
+                        <xctk:MaskedTextBox Grid.Row="0"
+                                            Grid.Column="1"
+                                            Mask="0000-00-00"
+                                            Text="{Binding FromDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                        <xctk:MaskedTextBox Grid.Row="1"
+                                            Grid.Column="1"
+                                            Mask="0000-00-00"
+                                            Text="{Binding ToDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                    </Grid>
+                </Expander>
+                <Button Content="Применить"
+                        Height="20"
+                        Command="{Binding FilterSetButtonClick}"></Button>
+                <Button Content="Сбросить"
+                        Height="20"
+                        Command="{Binding FilterResetButtonClick}"></Button>
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:TaskManager.ViewModels.MainViewModels"
         xmlns:uc="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow"
         Height="450"
@@ -41,9 +42,31 @@
                 Width="23"
                 Height="23"
                 Command="{Binding LoadCommand}" />
-        <ListBox ItemsSource="{Binding CurrentCollection}"
-                 SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
-                 Margin="10,35,10,10">
+        <Label Content="Сортировать"
+               HorizontalAlignment="Left"
+               Margin="10,42,0,0"
+               VerticalAlignment="Top" />
+        <ComboBox HorizontalAlignment="Left"
+                  Margin="96,44,0,0"
+                  VerticalAlignment="Top"
+                  Width="120"
+                  SelectedIndex="{Binding SelectedSortParameter}"
+                  ItemsSource="{Binding SortParameters}" />
+        <Label Content="по:"
+               HorizontalAlignment="Left"
+               Margin="221,42,0,0"
+               VerticalAlignment="Top"
+               RenderTransformOrigin="0.167,-0.063" />
+        <ComboBox HorizontalAlignment="Left"
+                  Margin="253,44,0,0"
+                  VerticalAlignment="Top"
+                  Width="120"
+                  SelectedIndex="{Binding SelectedSortDirection}"
+                  ItemsSource="{Binding SortDirection}" />
+        <ListBox
+                SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
+                 Margin="10,73,10,10"
+                 ItemsSource="{Binding CurrentCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <uc:TaskUc CurrentClass="{Binding}" />

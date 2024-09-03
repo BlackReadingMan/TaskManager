@@ -30,6 +30,7 @@ public sealed partial class TaskUc : ListedUc<Task>
     this.CreationTime.Content = this.CurrentClass.CreationTime;
     this.DeadLine.Content = this.CurrentClass.Deadline;
     this.Status.Content = this.CurrentClass.Status.EnumDescription();
+    this.Priority.Content = this.CurrentClass.Priority.EnumDescription();
     this.SetStateChangerContent();
   }
 

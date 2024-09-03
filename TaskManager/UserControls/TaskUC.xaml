@@ -64,5 +64,12 @@
                VerticalAlignment="Top"
                Height="26"
                Width="146" />
+        <Label x:Name="Priority"
+               Content="Priority"
+               HorizontalAlignment="Left"
+               Margin="270,10,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               Width="85" />
     </Grid>
 </userControls:ListedUc>

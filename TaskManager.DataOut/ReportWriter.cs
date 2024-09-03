@@ -11,9 +11,9 @@ using TaskEntity = TaskManager.DB.Models.Task;
 
 namespace TaskManager.DataOut;
 
-public class ReportWriter(IEnumerable<TaskEntity> tasks)
+public static class ReportWriter
 {
-  public async Task WriteReport(string path)
+  public static async Task WriteReport(IEnumerable<TaskEntity> tasks, string path)
   {
     var tasksList = tasks.ToList();
     var doc = DocX.Create(path);

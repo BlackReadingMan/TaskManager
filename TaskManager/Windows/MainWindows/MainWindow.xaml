@@ -80,9 +80,9 @@
         <Expander IsExpanded="{Binding IsFilterExpanded}"
                   HorizontalAlignment="Left"
                   Header="Фильтры"
-                  Margin="637,44,0,0"
+                  Margin="626,44,0,0"
                   VerticalAlignment="Top"
-                  Width="153">
+                  Width="152">
             <StackPanel Background="#FFE5E5E5">
                 <Expander Header="Статус">
                     <ListBox ItemsSource="{Binding Sorter.StatusFilters}"
@@ -126,14 +126,12 @@
                         <Label Content="До"
                                Grid.Row="1"
                                Grid.Column="0"></Label>
-                        <xctk:MaskedTextBox Grid.Row="0"
-                                            Grid.Column="1"
-                                            Mask="0000-00-00"
-                                            Text="{Binding Sorter.FromCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
-                        <xctk:MaskedTextBox Grid.Row="1"
-                                            Grid.Column="1"
-                                            Mask="0000-00-00"
-                                            Text="{Binding Sorter.ToCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                        <DatePicker Grid.Row="0"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding Sorter.FromCreationTime}"></DatePicker>
+                        <DatePicker Grid.Row="1"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding Sorter.ToCreationTime}"></DatePicker>
                     </Grid>
                 </Expander>
                 <Expander Header="Дедлайн">
@@ -152,22 +150,20 @@
                         <Label Content="До"
                                Grid.Row="1"
                                Grid.Column="0"></Label>
-                        <xctk:MaskedTextBox Grid.Row="0"
-                                            Grid.Column="1"
-                                            Mask="0000-00-00"
-                                            Text="{Binding Sorter.FromDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
-                        <xctk:MaskedTextBox Grid.Row="1"
-                                            Grid.Column="1"
-                                            Mask="0000-00-00"
-                                            Text="{Binding Sorter.ToDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                        <DatePicker Grid.Row="0"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding Sorter.FromDeadLine}"></DatePicker>
+                        <DatePicker Grid.Row="1"
+                                    Grid.Column="1"
+                                    SelectedDate="{Binding Sorter.ToDeadLine}"></DatePicker>
                     </Grid>
                 </Expander>
                 <Button Content="Применить"
                         Height="20"
-                        Command="{Binding FilterSetButtonClick}"></Button>
+                        Command="{Binding Sorter.FilterSetButtonClick}"></Button>
                 <Button Content="Сбросить"
                         Height="20"
-                        Command="{Binding FilterResetButtonClick}"></Button>
+                        Command="{Binding Sorter.FilterResetButtonClick}"></Button>
             </StackPanel>
         </Expander>
     </Grid>

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using TaskManager.DB.Enums;
 using TaskManager.DB.Models;
 using Xceed.Document.NET;
 
 namespace TaskManager.Utilities;
 
-internal class Sorter
+internal class Sorter : INotifyPropertyChanged
 {
   internal class Filter(string name)
   {
@@ -15,6 +18,16 @@ internal class Sorter
     public bool IsChecked { get; set; } = false;
   }
   private readonly ICollectionView _view;
+
+  private ICommand? _filterSetButtonClick;
+  public ICommand FilterSetButtonClick => this._filterSetButtonClick ??= new RelayCommand(f => this.ViewRefresh(), this.CanRefresh);
+
+  private ICommand? _filterResetButtonClick;
+  public ICommand FilterResetButtonClick => this._filterResetButtonClick ??= new RelayCommand(async f =>
+  {
+    this.ResetFilters();
+    this.ViewRefresh();
+  });
   public List<string> SortParameters { get; private set; } =
   [
     TaskSortParameter.Id.EnumDescription(),
@@ -52,60 +65,104 @@ internal class Sorter
     }
   }
 
-  private string _fromCreationTime;
-  public string FromCreationTime
+  private DateTime? _fromCreationTime;
+  public DateTime? FromCreationTime
   {
-    set => this._fromCreationTime = value;
+    get => this._fromCreationTime;
+    set
+    {
+      this._fromCreationTime = value;
+      OnPropertyChanged();
+    }
   }
 
-  private string _toCreationTime;
-  public string ToCreationTime
+  private DateTime? _toCreationTime;
+  public DateTime? ToCreationTime
   {
-    set => this._toCreationTime = value;
+    get => this._toCreationTime;
+    set
+    {
+      this._toCreationTime = value;
+      OnPropertyChanged();
+    }
   }
 
-  private string _fromDeadLine;
-  public string FromDeadLine
+  private DateTime? _fromDeadLine;
+  public DateTime? FromDeadLine
   {
-    set => this._fromDeadLine = value;
+    get => this._fromDeadLine;
+    set
+    {
+      this._fromDeadLine = value;
+      OnPropertyChanged();
+    }
   }
 
-  private string _toDeadLine;
-  public string ToDeadLine
+  private DateTime? _toDeadLine;
+  public DateTime? ToDeadLine
   {
-    set => this._toDeadLine = value;
+    get => this._toDeadLine;
+    set
+    {
+      this._toDeadLine = value;
+      OnPropertyChanged();
+    }
   }
-  public List<Filter> StatusFilters { get; private set; }
-  public List<Filter> PriorityFilters { get; private set; }
-  public void UpdateSort()
+
+  private List<Filter> _statusFilters;
+
+  public List<Filter> StatusFilters
+  {
+    get => _statusFilters;
+    private set
+    {
+      _statusFilters = value;
+      OnPropertyChanged();
+    }
+  }
+
+  private List<Filter> _priorityFilters;
+
+  public List<Filter> PriorityFilters
+  {
+    get => _priorityFilters;
+    private set
+    {
+      _priorityFilters = value;
+      OnPropertyChanged();
+    }
+  }
+  private void UpdateSort()
   {
     this._view.SortDescriptions.Clear();
     this._view.SortDescriptions.Add(new SortDescription(this._selectedSortParameter.ToString(), this._selectedSortDirection));
   }
 
-  public void ViewRefresh()
+  private void ViewRefresh()
   {
     this._view.Refresh();
   }
   private bool Contains(object obj)
   {
     if (obj is not Task task) return false;
-    return (!this.StatusFilters[0].IsChecked || task.Status == 0) &&
-           (!this.StatusFilters[1].IsChecked || task.Status == (TaskState)1) &&
-           (!this.StatusFilters[2].IsChecked || task.Status == (TaskState)2) &&
-           (!this.StatusFilters[3].IsChecked || task.Status == (TaskState)3) &&
-           (!this.PriorityFilters[0].IsChecked || task.Priority == 0) &&
-           (!this.PriorityFilters[1].IsChecked || task.Priority == (TaskPriority)1) &&
-           (!this.PriorityFilters[2].IsChecked || task.Priority == (TaskPriority)2) &&
-           (!this.PriorityFilters[3].IsChecked || task.Priority == (TaskPriority)3) &&
-           (!this.PriorityFilters[4].IsChecked || task.Priority == (TaskPriority)4) &&
-           (this._fromCreationTime == string.Empty || task.CreationTime > DateOnly.Parse(this._fromCreationTime)) &&
-           (this._toCreationTime == string.Empty || task.CreationTime < DateOnly.Parse(this._toCreationTime)) &&
-           (task.Deadline is null || this._fromDeadLine == string.Empty || task.Deadline > DateOnly.Parse(this._fromDeadLine)) &&
-           (task.Deadline is null || this._toDeadLine == string.Empty || task.Deadline < DateOnly.Parse(this._toDeadLine));
+    return ((!this.StatusFilters[0].IsChecked && !this.StatusFilters[1].IsChecked && !this.StatusFilters[2].IsChecked && !this.StatusFilters[3].IsChecked) ||
+            (this.StatusFilters[0].IsChecked && task.Status == (TaskState)0) ||
+           (this.StatusFilters[1].IsChecked && task.Status == (TaskState)1) ||
+           (this.StatusFilters[2].IsChecked && task.Status == (TaskState)2) ||
+           (this.StatusFilters[3].IsChecked && task.Status == (TaskState)3)) &&
+           ((!this.PriorityFilters[0].IsChecked && !this.PriorityFilters[1].IsChecked && !this.PriorityFilters[2].IsChecked && !this.PriorityFilters[3].IsChecked && !this.PriorityFilters[4].IsChecked) ||
+            (this.PriorityFilters[0].IsChecked && task.Priority == (TaskPriority)0) ||
+            (this.PriorityFilters[1].IsChecked && task.Priority == (TaskPriority)1) ||
+            (this.PriorityFilters[2].IsChecked && task.Priority == (TaskPriority)2) ||
+            (this.PriorityFilters[3].IsChecked && task.Priority == (TaskPriority)3) ||
+            (this.PriorityFilters[4].IsChecked && task.Priority == (TaskPriority)4)) &&
+           (this._fromCreationTime is null || task.CreationTime > DateOnly.FromDateTime(this._fromCreationTime.Value)) &&
+           (this._toCreationTime is null || task.CreationTime < DateOnly.FromDateTime(this._toCreationTime.Value)) &&
+           (task.Deadline is null || this._fromDeadLine is null || task.Deadline > DateOnly.FromDateTime(this._fromDeadLine.Value)) &&
+           (task.Deadline is null || this._toDeadLine is null || task.Deadline < DateOnly.FromDateTime(this._toDeadLine.Value));
   }
 
-  public void ResetFilters()
+  private void ResetFilters()
   {
     this.StatusFilters =
     [
@@ -122,21 +179,28 @@ internal class Sorter
       new Filter(TaskPriority.High.EnumDescription()),
       new Filter(TaskPriority.Critical.EnumDescription())
     ];
-    this._fromDeadLine = string.Empty;
-    this._toDeadLine = string.Empty;
+    this.FromCreationTime = null;
+    this.ToCreationTime = null;
+    this.FromDeadLine = null;
+    this.ToDeadLine = null;
   }
-  public bool CanRefresh(object parameter)
+  private bool CanRefresh(object parameter)
   {
-    return (this._fromCreationTime == string.Empty || this._fromCreationTime.Length == 8) &&
-           (this._toCreationTime == string.Empty || this._toCreationTime.Length == 8) &&
-           (this._fromDeadLine == string.Empty || this._fromDeadLine.Length == 8) &&
-           (this._toDeadLine == string.Empty || this._toDeadLine.Length == 8);
+    return (this._fromCreationTime is null || this._fromCreationTime.HasValue) &&
+           (this._toCreationTime is null || this._toCreationTime.HasValue) &&
+           (this._fromDeadLine is null || this._fromDeadLine.HasValue) &&
+           (this._toDeadLine is null || this._toDeadLine.HasValue);
   }
-
+  public event PropertyChangedEventHandler? PropertyChanged;
+  public void OnPropertyChanged([CallerMemberName] string prop = "")
+  {
+    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+  }
   public Sorter(ICollectionView view)
   {
     this.ResetFilters();
     this._view = view;
     this._view.Filter = this.Contains;
+    this.UpdateSort();
   }
 }

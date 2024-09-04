@@ -21,12 +21,12 @@
             <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Window.Style>
+    <!--<Window.Style>
         <Style TargetType="{x:Type base:AddTaskWindow}">
             <Setter Property="ReturnData"
                     Value="{Binding DialogResult}" />
         </Style>
-    </Window.Style>
+    </Window.Style>-->
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Grid>
         <Grid.RowDefinitions>
@@ -92,17 +92,15 @@
                      Width="322"
                      Height="63"
                      Text="{Binding Description, Mode=OneWayToSource}" />
-            <xctk:MaskedTextBox Name="DeadLineBox"
-                                Mask="0000-00-00"
+            <DatePicker Name="DeadLineBox"
                                 FontSize="20"
                                 Grid.Column="1"
                                 HorizontalAlignment="Center"
                                 Grid.Row="2"
-                                TextWrapping="Wrap"
                                 VerticalAlignment="Center"
                                 Width="322"
                                 Height="36"
-                                Text="{Binding DeadLine, Mode=OneWayToSource}" />
+                                SelectedDate="{Binding DeadLine, Mode=OneWayToSource}" />
             <ComboBox Name="PriorityComboBox"
                       FontSize="20"
                       Grid.Column="1"
@@ -111,6 +109,7 @@
                       VerticalAlignment="Center"
                       Width="322"
                       Height="46"
+                      SelectedIndex="{Binding SelectedPriority}"
                       ItemsSource="{Binding Priority}" />
             <ComboBox Name="ResponsibleComboBox"
                       FontSize="20"
@@ -120,6 +119,7 @@
                       VerticalAlignment="Center"
                       Width="322"
                       Height="48"
+                      SelectedIndex="0"
                       ItemsSource="{Binding Responsible}"
                       SelectedItem="{Binding SelectedResponsible, Mode=OneWayToSource}" />
         </Grid>

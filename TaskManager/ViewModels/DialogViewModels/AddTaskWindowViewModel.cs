@@ -12,23 +12,23 @@ namespace TaskManager.ViewModels.DialogViewModels;
 
 internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 {
-  private string _name = "";
+  private string _name = string.Empty;
 
   public string Name
   {
     set => this._name = value;
   }
 
-  private string _description = "";
+  private string _description = string.Empty;
 
   public string Description
   {
     set => this._description = value;
   }
 
-  private string _deadLine = "";
+  private DateTime? _deadLine;
 
-  public string DeadLine
+  public DateTime? DeadLine
   {
     set => this._deadLine = value;
   }
@@ -44,6 +44,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 
   public int SelectedPriority
   {
+    get => _selectedPriority;
     set => this._selectedPriority = value;
   }
 
@@ -86,7 +87,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
     {
       Name = this._name,
       Description = this._description,
-      Deadline = this._deadLine == string.Empty ? null : DateOnly.Parse(this._deadLine),
+      Deadline = this._deadLine is null ? null : DateOnly.FromDateTime(this._deadLine.Value),
       Priority = (TaskPriority)this._selectedPriority,
       Responsible =
         this._selectedResponsible is null ||
@@ -101,7 +102,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this._name == string.Empty && (this._deadLine == string.Empty || this._deadLine.Length == 8) &&
-           this._description == string.Empty;
+    return this._name != string.Empty && (this._deadLine is null || (this._deadLine.HasValue)) &&
+           this._description != string.Empty;
   }
 }

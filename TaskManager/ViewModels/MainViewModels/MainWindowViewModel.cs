@@ -47,16 +47,6 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
     this.CurrentCollection.Remove(this._selectedTask);
   }, this.CanAddExecute);
 
-  private ICommand? _filterSetButtonClick;
-  public ICommand FilterSetButtonClick => this._filterSetButtonClick ??= new RelayCommand(f => this.Sorter.ViewRefresh(), this.Sorter.CanRefresh);
-
-  private ICommand? _filterResetButtonClick;
-  public ICommand FilterResetButtonClick => this._filterResetButtonClick ??= new RelayCommand(async f =>
-  {
-    this.Sorter.ResetFilters();
-    this.Sorter.ViewRefresh();
-  });
-
   private ICommand? _filterMouseLostClick;
   public ICommand FilterMouseLostClick => this._filterMouseLostClick ??= new RelayCommand(async f =>
   {
@@ -66,7 +56,6 @@ internal sealed class MainWindowViewModel : ListWindowViewModel<Task>
   protected override async System.Threading.Tasks.Task UpdateData(object sender)
   {
     await DBAPI.LoadTable<Task>(this.CurrentCollection);
-    this.Sorter.UpdateSort();
   }
 
   protected override async void AddSubject()

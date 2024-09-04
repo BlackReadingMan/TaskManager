@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -72,7 +71,7 @@ internal class Sorter : INotifyPropertyChanged
     set
     {
       this._fromCreationTime = value;
-      OnPropertyChanged();
+      this.OnPropertyChanged();
     }
   }
 
@@ -83,7 +82,7 @@ internal class Sorter : INotifyPropertyChanged
     set
     {
       this._toCreationTime = value;
-      OnPropertyChanged();
+      this.OnPropertyChanged();
     }
   }
 
@@ -94,7 +93,7 @@ internal class Sorter : INotifyPropertyChanged
     set
     {
       this._fromDeadLine = value;
-      OnPropertyChanged();
+      this.OnPropertyChanged();
     }
   }
 
@@ -105,7 +104,7 @@ internal class Sorter : INotifyPropertyChanged
     set
     {
       this._toDeadLine = value;
-      OnPropertyChanged();
+      this.OnPropertyChanged();
     }
   }
 
@@ -113,11 +112,11 @@ internal class Sorter : INotifyPropertyChanged
 
   public List<Filter> StatusFilters
   {
-    get => _statusFilters;
+    get => this._statusFilters;
     private set
     {
-      _statusFilters = value;
-      OnPropertyChanged();
+      this._statusFilters = value;
+      this.OnPropertyChanged();
     }
   }
 
@@ -125,11 +124,11 @@ internal class Sorter : INotifyPropertyChanged
 
   public List<Filter> PriorityFilters
   {
-    get => _priorityFilters;
+    get => this._priorityFilters;
     private set
     {
-      _priorityFilters = value;
-      OnPropertyChanged();
+      this._priorityFilters = value;
+      this.OnPropertyChanged();
     }
   }
   private void UpdateSort()
@@ -146,12 +145,12 @@ internal class Sorter : INotifyPropertyChanged
   {
     if (obj is not Task task) return false;
     return ((!this.StatusFilters[0].IsChecked && !this.StatusFilters[1].IsChecked && !this.StatusFilters[2].IsChecked && !this.StatusFilters[3].IsChecked) ||
-            (this.StatusFilters[0].IsChecked && task.Status == (TaskState)0) ||
+            (this.StatusFilters[0].IsChecked && task.Status == 0) ||
            (this.StatusFilters[1].IsChecked && task.Status == (TaskState)1) ||
            (this.StatusFilters[2].IsChecked && task.Status == (TaskState)2) ||
            (this.StatusFilters[3].IsChecked && task.Status == (TaskState)3)) &&
            ((!this.PriorityFilters[0].IsChecked && !this.PriorityFilters[1].IsChecked && !this.PriorityFilters[2].IsChecked && !this.PriorityFilters[3].IsChecked && !this.PriorityFilters[4].IsChecked) ||
-            (this.PriorityFilters[0].IsChecked && task.Priority == (TaskPriority)0) ||
+            (this.PriorityFilters[0].IsChecked && task.Priority == 0) ||
             (this.PriorityFilters[1].IsChecked && task.Priority == (TaskPriority)1) ||
             (this.PriorityFilters[2].IsChecked && task.Priority == (TaskPriority)2) ||
             (this.PriorityFilters[3].IsChecked && task.Priority == (TaskPriority)3) ||

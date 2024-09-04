@@ -4,7 +4,6 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
                    xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                    xmlns:base="clr-namespace:TaskManager.Windows.DialogWindows"
                    xmlns:vm="clr-namespace:TaskManager.ViewModels.DialogViewModels"
@@ -21,12 +20,12 @@
             <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <!--<Window.Style>
+    <Window.Style>
         <Style TargetType="{x:Type base:AddTaskWindow}">
             <Setter Property="ReturnData"
                     Value="{Binding DialogResult}" />
         </Style>
-    </Window.Style>-->
+    </Window.Style>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
     <Grid>
         <Grid.RowDefinitions>
@@ -93,14 +92,14 @@
                      Height="63"
                      Text="{Binding Description, Mode=OneWayToSource}" />
             <DatePicker Name="DeadLineBox"
-                                FontSize="20"
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                Grid.Row="2"
-                                VerticalAlignment="Center"
-                                Width="322"
-                                Height="36"
-                                SelectedDate="{Binding DeadLine, Mode=OneWayToSource}" />
+                        FontSize="20"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        Grid.Row="2"
+                        VerticalAlignment="Center"
+                        Width="322"
+                        Height="36"
+                        SelectedDate="{Binding DeadLine, Mode=OneWayToSource}" />
             <ComboBox Name="PriorityComboBox"
                       FontSize="20"
                       Grid.Column="1"

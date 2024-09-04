@@ -44,7 +44,7 @@ internal class AddTaskWindowViewModel : DialogWindowViewModel<Task>
 
   public int SelectedPriority
   {
-    get => _selectedPriority;
+    get => this._selectedPriority;
     set => this._selectedPriority = value;
   }
 

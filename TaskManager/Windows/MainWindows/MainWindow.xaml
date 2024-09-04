@@ -20,8 +20,8 @@
             <b:InvokeCommandAction Command="{Binding LoadCommand}" />
         </b:EventTrigger>
         <b:EventTrigger EventName="MouseDown">
-                <b:InvokeCommandAction Command="{Binding FilterMouseLostClick}" />
-            </b:EventTrigger>
+            <b:InvokeCommandAction Command="{Binding FilterMouseLostClick}" />
+        </b:EventTrigger>
     </b:Interaction.Triggers>
     <Grid>
         <Button Content="Сформировать отчёт"
@@ -53,8 +53,8 @@
                   Margin="96,44,0,0"
                   VerticalAlignment="Top"
                   Width="120"
-                  SelectedIndex="{Binding SelectedSortParameter}"
-                  ItemsSource="{Binding SortParameters}" />
+                  SelectedIndex="{Binding Sorter.SelectedSortParameter}"
+                  ItemsSource="{Binding Sorter.SortParameters}" />
         <Label Content="по:"
                HorizontalAlignment="Left"
                Margin="221,42,0,0"
@@ -64,10 +64,9 @@
                   Margin="253,44,0,0"
                   VerticalAlignment="Top"
                   Width="120"
-                  SelectedIndex="{Binding SelectedSortDirection}"
-                  ItemsSource="{Binding SortDirection}" />
-        <ListBox
-                SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
+                  SelectedIndex="{Binding Sorter.SelectedSortDirection}"
+                  ItemsSource="{Binding Sorter.SortDirection}" />
+        <ListBox SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
                  Margin="10,73,10,10"
                  ItemsSource="{Binding CurrentCollection}">
             <ListBox.ItemTemplate>
@@ -78,8 +77,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Expander
-                IsExpanded="{Binding IsFilterExpanded}"
+        <Expander IsExpanded="{Binding IsFilterExpanded}"
                   HorizontalAlignment="Left"
                   Header="Фильтры"
                   Margin="637,44,0,0"
@@ -87,7 +85,7 @@
                   Width="153">
             <StackPanel Background="#FFE5E5E5">
                 <Expander Header="Статус">
-                    <ListBox ItemsSource="{Binding StatusFilters}"
+                    <ListBox ItemsSource="{Binding Sorter.StatusFilters}"
                              Background="#FFE5E5E5">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -100,7 +98,7 @@
                     </ListBox>
                 </Expander>
                 <Expander Header="Приоритет">
-                    <ListBox ItemsSource="{Binding PriorityFilters}"
+                    <ListBox ItemsSource="{Binding Sorter.PriorityFilters}"
                              Background="#FFE5E5E5">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
@@ -131,11 +129,11 @@
                         <xctk:MaskedTextBox Grid.Row="0"
                                             Grid.Column="1"
                                             Mask="0000-00-00"
-                                            Text="{Binding FromCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                                            Text="{Binding Sorter.FromCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
                         <xctk:MaskedTextBox Grid.Row="1"
                                             Grid.Column="1"
                                             Mask="0000-00-00"
-                                            Text="{Binding ToCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                                            Text="{Binding Sorter.ToCreationTime, Mode=OneWayToSource}"></xctk:MaskedTextBox>
                     </Grid>
                 </Expander>
                 <Expander Header="Дедлайн">
@@ -157,11 +155,11 @@
                         <xctk:MaskedTextBox Grid.Row="0"
                                             Grid.Column="1"
                                             Mask="0000-00-00"
-                                            Text="{Binding FromDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                                            Text="{Binding Sorter.FromDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
                         <xctk:MaskedTextBox Grid.Row="1"
                                             Grid.Column="1"
                                             Mask="0000-00-00"
-                                            Text="{Binding ToDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
+                                            Text="{Binding Sorter.ToDeadLine, Mode=OneWayToSource}"></xctk:MaskedTextBox>
                     </Grid>
                 </Expander>
                 <Button Content="Применить"

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TaskManager.DB;
 using TaskManager.DB.Enums;
@@ -13,9 +12,11 @@ namespace TaskManager.DataOut;
 
 public static class ReportWriter
 {
-  public static async Task WriteReport(IEnumerable<TaskEntity> tasks, string path)
+  public static async Task WriteReport(string path)
   {
-    var tasksList = tasks.ToList();
+    var tasks = new List<TaskEntity>();
+    await DBAPI.LoadTable<TaskEntity>(tasks);
+
     var doc = DocX.Create(path);
 
     doc.InsertParagraph("Отчет по задачам")
@@ -23,7 +24,7 @@ public static class ReportWriter
         .Bold()
         .Alignment = Alignment.center;
 
-    foreach (var task in tasksList)
+    foreach (var task in tasks)
     {
       doc.InsertParagraph()
           .AppendLine(new string('-', 50))

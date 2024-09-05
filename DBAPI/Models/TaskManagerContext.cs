@@ -104,6 +104,8 @@ public partial class TaskManagerContext : DbContext
 
       entity.ToTable("User");
 
+      entity.HasIndex(e => e.Email, "User_email_key").IsUnique();
+
       entity.HasIndex(e => e.Login, "User_login_key").IsUnique();
 
       entity.Property(e => e.Id).HasColumnName("id");

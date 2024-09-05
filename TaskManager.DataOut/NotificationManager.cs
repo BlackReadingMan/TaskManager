@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Mail;
 using TaskManager.DB;
-using TaskManager.DB.Enums;
 using TaskManager.DB.Models;
 using Xceed.Document.NET;
 using Task = System.Threading.Tasks.Task;
@@ -31,7 +30,7 @@ public static class NotificationManager
     {
       using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
       mm.Subject = $"{Subject}";
-      mm.Body = $"У отслеживаемой вами задачи \"{task.Name}\", пользователь \"{changer.Login}\" изменил стаус с \"{(task.Status-1).EnumDescription()}\" на \"{task.Status.EnumDescription()}\".";
+      mm.Body = $"У отслеживаемой вами задачи \"{task.Name}\", пользователь \"{changer.Login}\" изменил стаус с \"{(task.Status - 1).EnumDescription()}\" на \"{task.Status.EnumDescription()}\".";
       mm.IsBodyHtml = false;
       using var sc = new SmtpClient($"{EmailSmtp}", SmtpPort);
       sc.EnableSsl = true;

@@ -23,7 +23,7 @@ public sealed partial class TaskUc : ListedUc<Task>
 
   protected override async System.Threading.Tasks.Task UpdateData()
   {
-    if (CurrentClass.Responsible.HasValue && CurrentClass.Responsible == App.CurrentUser.Id)
+    if (this.CurrentClass.Responsible.HasValue && this.CurrentClass.Responsible == App.CurrentUser.Id)
     {
       this.SubscribeButton.IsEnabled = false;
       this.SubscribeButton.Content = "Отслеживать";
@@ -37,7 +37,7 @@ public sealed partial class TaskUc : ListedUc<Task>
     this.TaskName.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
-    this.Responsible.Content = this.CurrentClass.Responsible is null?"Не назначен": (await DBAPI.GetItem<User>(this.CurrentClass.Responsible.Value))?.Login;
+    this.Responsible.Content = this.CurrentClass.Responsible is null ? "Не назначен" : (await DBAPI.GetItem<User>(this.CurrentClass.Responsible.Value))?.Login;
     this.DeadLine.Content = this.CurrentClass.Deadline;
     this.Status.Content = this.CurrentClass.Status.EnumDescription();
     this.Priority.Content = this.CurrentClass.Priority.EnumDescription();
@@ -55,12 +55,12 @@ public sealed partial class TaskUc : ListedUc<Task>
     {
       await DBAPI.RemoveItem(this._observer);
       this.SubscribeButton.Content = "Отслеживать";
-      _observer = null;
+      this._observer = null;
     }
     else
     {
-      _observer = new Observer { IdTask = this.CurrentClass.Id, IdUser = App.CurrentUser.Id };
-      await DBAPI.AddItem(_observer);
+      this._observer = new Observer { IdTask = this.CurrentClass.Id, IdUser = App.CurrentUser.Id };
+      await DBAPI.AddItem(this._observer);
       this.SubscribeButton.Content = "Не отслеживать";
     }
   }
@@ -98,6 +98,6 @@ public sealed partial class TaskUc : ListedUc<Task>
     this.SetStateChangerContent();
     await NotificationManager.NotifyUsersAsync(this.CurrentClass, App.CurrentUser);
     await DBAPI.EditItem(this.CurrentClass);
-    
+
   }
 }

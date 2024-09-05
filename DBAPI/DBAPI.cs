@@ -48,10 +48,15 @@ public static class DBAPI
     await using var context = new TaskManagerContext();
     return await context.FindAsync<T>(id);
   }
+  public static async Task<bool> IsLoginExists(string login)
+  {
+    await using var context = new TaskManagerContext();
+    return await context.Users.FirstOrDefaultAsync(x => x.Login == login) is not null;
+  }
   public static async Task<User?> CheckAuthorization(string login, string password)
   {
     await using var context = new TaskManagerContext();
-    return context.Users.FirstOrDefault(x => x.Login == login && x.Password == password);
+    return await context.Users.FirstOrDefaultAsync(x => x.Login == login && x.Password == password);
   }
 
   public static async Task<List<Comment>> GetTaskComments(Models.Task task)
@@ -73,13 +78,13 @@ public static class DBAPI
   public static async Task<Observer?> IsUserObserveTask(Models.Task task, User user)
   {
     await using var context = new TaskManagerContext();
-    return context.Observers.FirstOrDefault(x => x.IdTask == task.Id && x.IdUser == user.Id);
+    return await context.Observers.FirstOrDefaultAsync(x => x.IdTask == task.Id && x.IdUser == user.Id);
   }
 
   public static async Task<Dictionary<string, int>> GetUsersLogins()
   {
     await using var context = new TaskManagerContext();
-    return context.Users.ToDictionary(x => x.Login + " - " + x.Name, x => x.Id);
+    return await context.Users.ToDictionaryAsync(x => x.Login + " - " + x.Name, x => x.Id);
   }
 }
 

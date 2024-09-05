@@ -1,0 +1,106 @@
+﻿<local:DialogWindow x:TypeArguments="models:User"
+                    x:Class="TaskManager.Windows.DialogWindows.AddUserWindow"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:TaskManager.Windows.DialogWindows"
+                    xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
+                    xmlns:dialogViewModels="clr-namespace:TaskManager.ViewModels.DialogViewModels"
+                    mc:Ignorable="d"
+                    Title="AddUserWindow"
+                    Height="450"
+                    Width="513">
+    <Window.DataContext>
+        <dialogViewModels:AddUserWindowViewModel></dialogViewModels:AddUserWindowViewModel>
+    </Window.DataContext>
+    <Window.Style>
+        <Style TargetType="{x:Type local:AddUserWindow}">
+            <Setter Property="ReturnData"
+                    Value="{Binding DialogResult}" />
+        </Style>
+    </Window.Style>
+    <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="166*" />
+            <RowDefinition Height="51*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="61*" />
+                <RowDefinition Height="62*" />
+                <RowDefinition Height="67*" />
+                <RowDefinition Height="66*" />
+            </Grid.RowDefinitions>
+            <Label Content="Имя"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center" />
+            <Label Content="Логин"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="1"
+                   VerticalAlignment="Center" />
+            <Label Content="Пароль"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="2"
+                   VerticalAlignment="Center" />
+            <Label Content="Почта"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   Grid.Column="0"
+                   Grid.Row="3"
+                   VerticalAlignment="Center" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     FontSize="20"
+                     HorizontalAlignment="Center"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Center"
+                     Width="322"
+                     Height="36"
+                     Text="{Binding Name, Mode=OneWayToSource}" />
+            <TextBox Grid.Column="1"
+                     HorizontalAlignment="Center"
+                     Grid.Row="1"
+                     FontSize="20"
+                     TextWrapping="Wrap"
+                     VerticalAlignment="Center"
+                     Width="322"
+                     Height="36"
+                     Text="{Binding Login, Mode=OneWayToSource}" />
+            <TextBox FontSize="20"
+                     Grid.Column="1"
+                     HorizontalAlignment="Center"
+                     Grid.Row="2"
+                     VerticalAlignment="Center"
+                     Width="322"
+                     Height="36"
+                     Text="{Binding Password, Mode=OneWayToSource}" />
+            <TextBox FontSize="20"
+                     Grid.Column="1"
+                     HorizontalAlignment="Center"
+                     Grid.Row="3"
+                     VerticalAlignment="Center"
+                     Width="322"
+                     Height="46"
+                     Text="{Binding Email, Mode=OneWayToSource}" />
+        </Grid>
+        <Button Content="Добавить"
+                FontSize="20"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                Height="56"
+                Width="213"
+                Command="{Binding AddButtonClick}" />
+    </Grid>
+</local:DialogWindow>

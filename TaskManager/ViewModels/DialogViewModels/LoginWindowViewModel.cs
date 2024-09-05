@@ -3,6 +3,7 @@ using TaskManager.DB;
 using TaskManager.DB.Models;
 using TaskManager.Utilities;
 using TaskManager.ViewModels.BaseViewModels;
+using TaskManager.Windows.DialogWindows;
 
 namespace TaskManager.ViewModels.DialogViewModels;
 
@@ -31,9 +32,13 @@ internal sealed class LoginWindowViewModel : DialogWindowViewModel<User>
   });
 
 
-  protected override void AddSubject()
+  protected override async void AddSubject()
   {
-
+    var window = new AddUserWindow();
+    window.ShowDialog();
+    var user = window.ReturnData;
+    if (user is null) return;
+    await DBAPI.AddItem(user);
   }
 
   protected override bool CanAddExecute(object parameter)

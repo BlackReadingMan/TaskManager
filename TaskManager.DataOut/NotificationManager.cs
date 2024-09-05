@@ -26,7 +26,7 @@ public static class NotificationManager
   private static async Task NotifyObserversAsync(DB.Models.Task task, User changer)
   {
     var users = await DBAPI.GetTaskObservers(task);
-    foreach (var user in users.Where(user => MailAddress.TryCreate(user.Email, out _)))
+    foreach (var user in users.Where(user => user.Email is not null))
     {
       using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
       mm.Subject = $"{Subject}";
@@ -43,13 +43,11 @@ public static class NotificationManager
 
   private static async Task NotifyResponsibleAsync(DB.Models.Task task, User changer)
   {
-    if (task.Responsible is null) return;
-    var user = await DBAPI.GetItem<User>(task.Responsible.Value);
-    if (user == null) return;
-    if (!MailAddress.TryCreate(user.Email, out _))
-    {
+    if (task.Responsible is null) 
       return;
-    }
+    var user = await DBAPI.GetItem<User>(task.Responsible.Value);
+    if (user?.Email is null) 
+      return;
     using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
     mm.Subject = $"{Subject}";
     mm.Body = $"У вашей задачи \"{task.Name}\", пользователь \"{changer.Login}\" изменил стаус с \"{(task.Status - 1).EnumDescription()}\" на \"{task.Status.EnumDescription()}\".";

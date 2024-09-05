@@ -146,9 +146,9 @@ internal class Sorter : INotifyPropertyChanged
     if (obj is not Task task) return false;
     return ((!this.StatusFilters[0].IsChecked && !this.StatusFilters[1].IsChecked && !this.StatusFilters[2].IsChecked && !this.StatusFilters[3].IsChecked) ||
             (this.StatusFilters[0].IsChecked && task.Status == 0) ||
-           (this.StatusFilters[1].IsChecked && task.Status == (TaskState)1) ||
-           (this.StatusFilters[2].IsChecked && task.Status == (TaskState)2) ||
-           (this.StatusFilters[3].IsChecked && task.Status == (TaskState)3)) &&
+           (this.StatusFilters[1].IsChecked && task.Status == (TaskStatus)1) ||
+           (this.StatusFilters[2].IsChecked && task.Status == (TaskStatus)2) ||
+           (this.StatusFilters[3].IsChecked && task.Status == (TaskStatus)3)) &&
            ((!this.PriorityFilters[0].IsChecked && !this.PriorityFilters[1].IsChecked && !this.PriorityFilters[2].IsChecked && !this.PriorityFilters[3].IsChecked && !this.PriorityFilters[4].IsChecked) ||
             (this.PriorityFilters[0].IsChecked && task.Priority == 0) ||
             (this.PriorityFilters[1].IsChecked && task.Priority == (TaskPriority)1) ||
@@ -165,10 +165,10 @@ internal class Sorter : INotifyPropertyChanged
   {
     this.StatusFilters =
     [
-      new Filter(TaskState.NotAcceptedForWork.EnumDescription()),
-      new Filter(TaskState.TakenIntoWork.EnumDescription()),
-      new Filter(TaskState.UnderReview.EnumDescription()),
-      new Filter(TaskState.Completed.EnumDescription()),
+      new Filter(TaskStatus.NotAcceptedForWork.EnumDescription()),
+      new Filter(TaskStatus.TakenIntoWork.EnumDescription()),
+      new Filter(TaskStatus.UnderReview.EnumDescription()),
+      new Filter(TaskStatus.Completed.EnumDescription()),
     ];
     this.PriorityFilters =
     [

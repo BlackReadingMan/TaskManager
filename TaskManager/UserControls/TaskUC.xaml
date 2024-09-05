@@ -57,6 +57,13 @@
                VerticalAlignment="Top"
                Height="26"
                Width="85" />
+        <Label x:Name="Responsible"
+               Content="DeadLine"
+               HorizontalAlignment="Left"
+               Margin="360,10,0,0"
+               VerticalAlignment="Top"
+               Height="26"
+               Width="85" />
         <Label x:Name="Status"
                Content="Status"
                HorizontalAlignment="Left"

@@ -1,57 +1,65 @@
-﻿using System.Net.Mail;
+﻿using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using TaskManager.DB;
 using TaskManager.DB.Enums;
 using TaskManager.DB.Models;
+using Xceed.Document.NET;
 using Task = System.Threading.Tasks.Task;
 
 namespace TaskManager.DataOut;
 
 public static class NotificationManager
 {
-  private const string EmailSmtp = "smtp.mail.ru";
-  private const int SmtpPort = 25;
+  private const string EmailSmtp = "smtp.office365.com";
+  private const int SmtpPort = 587;
   //нужно создать почту
-  private const string Email = "";
-  private const string Password = "";
+  private const string Email = "TaskManagere@outlook.com";
+  private const string Password = "JCW-XEr-F4x-t7Z";
   private const string Subject = "Изменение статуса задачи.";
-  private const string BodyForObserver = "Test";
-  private const string BodyForResponsible = "Test";
 
-  public static async Task NotifyUsersAsync(DB.Models.Task task, TaskState newStatus)
+  public static async Task NotifyUsersAsync(DB.Models.Task task, User changer)
   {
-    //using var sc = new SmtpClient($"{EmailSmtp}", SmtpPort)
-    //{
-    //  EnableSsl = true,
-    //  DeliveryMethod = SmtpDeliveryMethod.Network,
-    //  UseDefaultCredentials = false,
-    //  Credentials = new NetworkCredential($"{Email}", $"{Password}")
-    //};
-    //await NotifyObserversAsync(task, newStatus, sc);
-    //await NotifyResponsibleAsync(task, newStatus, sc);
+    await NotifyObserversAsync(task, changer);
+    await NotifyResponsibleAsync(task, changer);
   }
 
-  private static async Task NotifyObserversAsync(DB.Models.Task task, TaskState newStatus, SmtpClient sc)
+  private static async Task NotifyObserversAsync(DB.Models.Task task, User changer)
   {
     var users = await DBAPI.GetTaskObservers(task);
-    foreach (var user in users)
+    foreach (var user in users.Where(user => MailAddress.TryCreate(user.Email, out _)))
     {
       using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
       mm.Subject = $"{Subject}";
-      mm.Body = $"{BodyForObserver}";
+      mm.Body = $"У отслеживаемой вами задачи \"{task.Name}\", пользователь \"{changer.Login}\" изменил стаус с \"{(task.Status-1).EnumDescription()}\" на \"{task.Status.EnumDescription()}\".";
       mm.IsBodyHtml = false;
-      sc.Send(mm);
+      using var sc = new SmtpClient($"{EmailSmtp}", SmtpPort);
+      sc.EnableSsl = true;
+      sc.DeliveryMethod = SmtpDeliveryMethod.Network;
+      sc.UseDefaultCredentials = false;
+      sc.Credentials = new NetworkCredential($"{Email}", $"{Password}");
+      await sc.SendMailAsync(mm);
     }
   }
 
-  private static async Task NotifyResponsibleAsync(DB.Models.Task task, TaskState newStatus, SmtpClient sc)
+  private static async Task NotifyResponsibleAsync(DB.Models.Task task, User changer)
   {
     if (task.Responsible is null) return;
-    var user = await DBAPI.GetItem<User>((int)task.Responsible);
+    var user = await DBAPI.GetItem<User>(task.Responsible.Value);
     if (user == null) return;
+    if (!MailAddress.TryCreate(user.Email, out _))
+    {
+      return;
+    }
     using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
     mm.Subject = $"{Subject}";
-    mm.Body = $"{BodyForResponsible}";
+    mm.Body = $"У вашей задачи \"{task.Name}\", пользователь \"{changer.Login}\" изменил стаус с \"{(task.Status - 1).EnumDescription()}\" на \"{task.Status.EnumDescription()}\".";
     mm.IsBodyHtml = false;
-    sc.Send(mm);
+    using var sc = new SmtpClient($"{EmailSmtp}", SmtpPort);
+    sc.EnableSsl = true;
+    sc.DeliveryMethod = SmtpDeliveryMethod.Network;
+    sc.UseDefaultCredentials = false;
+    sc.Credentials = new NetworkCredential($"{Email}", $"{Password}");
+    await sc.SendMailAsync(mm);
   }
 }

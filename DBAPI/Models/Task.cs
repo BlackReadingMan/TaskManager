@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskManager.DB.Enums;
+using TaskStatus = TaskManager.DB.Enums.TaskStatus;
 
 namespace TaskManager.DB.Models;
 
@@ -18,7 +19,7 @@ public partial class Task
 
   public int? Responsible { get; set; }
 
-  public TaskState Status { get; set; }
+  public TaskStatus Status { get; set; }
 
   public DateOnly CreationTime { get; set; }
 

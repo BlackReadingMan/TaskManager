@@ -2,7 +2,7 @@
 
 namespace TaskManager.DB.Enums;
 
-public enum TaskState
+public enum TaskStatus
 {
   [Description("Не взята в работу")]
   NotAcceptedForWork = 0,

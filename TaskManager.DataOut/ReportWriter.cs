@@ -7,6 +7,7 @@ using Xceed.Document.NET;
 using Xceed.Words.NET;
 using Task = System.Threading.Tasks.Task;
 using TaskEntity = TaskManager.DB.Models.Task;
+using TaskStatus = TaskManager.DB.Enums.TaskStatus;
 
 namespace TaskManager.DataOut;
 
@@ -89,7 +90,7 @@ public static class ReportWriter
     };
     return result;
   }
-  private static string GetStringStatus(TaskState status)
+  private static string GetStringStatus(TaskStatus status)
   {
     var result = status switch
     {

@@ -23,11 +23,21 @@ public sealed partial class TaskUc : ListedUc<Task>
 
   protected override async System.Threading.Tasks.Task UpdateData()
   {
-    this._observer = await DBAPI.IsUserObserveTask(this.CurrentClass, App.CurrentUser);
-    this.SubscribeButton.Content = this._observer is not null ? "Не отслеживать" : "Отслеживать";
+    if (CurrentClass.Responsible.HasValue && CurrentClass.Responsible == App.CurrentUser.Id)
+    {
+      this.SubscribeButton.IsEnabled = false;
+      this.SubscribeButton.Content = "Отслеживать";
+    }
+    else
+    {
+      this.SubscribeButton.IsEnabled = true;
+      this._observer = await DBAPI.IsUserObserveTask(this.CurrentClass, App.CurrentUser);
+      this.SubscribeButton.Content = this._observer is not null ? "Не отслеживать" : "Отслеживать";
+    }
     this.TaskName.Content = this.CurrentClass.Name;
     this.Description.Text = this.CurrentClass.Description;
     this.CreationTime.Content = this.CurrentClass.CreationTime;
+    this.Responsible.Content = this.CurrentClass.Responsible is null?"Не назначен": (await DBAPI.GetItem<User>(this.CurrentClass.Responsible.Value))?.Login;
     this.DeadLine.Content = this.CurrentClass.Deadline;
     this.Status.Content = this.CurrentClass.Status.EnumDescription();
     this.Priority.Content = this.CurrentClass.Priority.EnumDescription();
@@ -45,10 +55,12 @@ public sealed partial class TaskUc : ListedUc<Task>
     {
       await DBAPI.RemoveItem(this._observer);
       this.SubscribeButton.Content = "Отслеживать";
+      _observer = null;
     }
     else
     {
-      await DBAPI.AddItem(new Observer { IdTask = this.CurrentClass.Id, IdUser = App.CurrentUser.Id });
+      _observer = new Observer { IdTask = this.CurrentClass.Id, IdUser = App.CurrentUser.Id };
+      await DBAPI.AddItem(_observer);
       this.SubscribeButton.Content = "Не отслеживать";
     }
   }
@@ -57,19 +69,19 @@ public sealed partial class TaskUc : ListedUc<Task>
   {
     switch (this.CurrentClass.Status)
     {
-      case TaskState.NotAcceptedForWork:
+      case TaskStatus.NotAcceptedForWork:
         this.StateChanger.Content = "Взять в работу";
         this.StateChanger.IsEnabled = !this.IsResponsible();
         break;
-      case TaskState.TakenIntoWork:
+      case TaskStatus.TakenIntoWork:
         this.StateChanger.Content = "Отправить на проверку";
         this.StateChanger.IsEnabled = !this.IsResponsible();
         break;
-      case TaskState.UnderReview:
+      case TaskStatus.UnderReview:
         this.StateChanger.Content = "Подтвердить выполнение";
         this.StateChanger.IsEnabled = this.IsResponsible();
         break;
-      case TaskState.Completed:
+      case TaskStatus.Completed:
         this.StateChanger.Content = "Завершена";
         this.StateChanger.IsEnabled = false;
         break;
@@ -82,8 +94,10 @@ public sealed partial class TaskUc : ListedUc<Task>
   }
   private async void StateChanger_Click(object sender, System.Windows.RoutedEventArgs e)
   {
-    await NotificationManager.NotifyUsersAsync(this.CurrentClass, ++this.CurrentClass.Status);
-    await DBAPI.EditItem(this.CurrentClass);
+    this.CurrentClass.Status++;
     this.SetStateChangerContent();
+    await NotificationManager.NotifyUsersAsync(this.CurrentClass, App.CurrentUser);
+    await DBAPI.EditItem(this.CurrentClass);
+    
   }
 }

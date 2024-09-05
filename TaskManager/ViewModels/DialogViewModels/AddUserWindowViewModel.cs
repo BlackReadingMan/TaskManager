@@ -1,4 +1,5 @@
-﻿using TaskManager.DB;
+﻿using System.Net.Mail;
+using TaskManager.DB;
 using TaskManager.DB.Models;
 using TaskManager.ViewModels.BaseViewModels;
 
@@ -36,6 +37,11 @@ internal class AddUserWindowViewModel : DialogWindowViewModel<User>
 
   protected override async void AddSubject()
   {
+    if (!MailAddress.TryCreate(this._email, out _))
+    {
+      App.ShowError("Некоректный адрес почты.");
+      return;
+    }
     if (await DBAPI.IsLoginExists(this._login))
     {
       App.ShowError("Этот логин занят.");
@@ -54,7 +60,6 @@ internal class AddUserWindowViewModel : DialogWindowViewModel<User>
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this._name != string.Empty && this._login != string.Empty &&
-           (this._email != string.Empty || (this._email.Contains('@') && this._email.Contains('.')));
+    return this._name != string.Empty && this._login != string.Empty;
   }
 }

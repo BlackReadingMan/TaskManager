@@ -5,34 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:TaskManager.ViewModels.MainViewModels"
         mc:Ignorable="d"
-        Title="CommentWindow"
-        Height="450"
-        Width="800">
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
+        Title="Комментарии" Height="500" Width="900" Background="#FF494848" WindowStartupLocation="CenterScreen" MinHeight="500" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
-            <b:InvokeCommandAction Command="{Binding LoadCommand}" />
+            <b:InvokeCommandAction Command="{Binding LoadCommand}"/>
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
-        <Button Content="Добавить комментарий"
-                HorizontalAlignment="Left"
-                Margin="10,10,0,0"
+
+    <Grid Background="Cornsilk">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Добавить комментарий" 
+               Height="40" 
+               Margin="20,8,708,452" 
+               FontSize="14" 
+               Grid.ColumnSpan="2" 
+               Foreground="Black" 
+               Background="#FFB8CCAB" BorderBrush="#FF707070" Padding="4,5,5,5" BorderThickness="1,1,1,1"/>
+
+        <Button
+                HorizontalAlignment="Left" 
+                Margin="16,8,0,0" 
                 VerticalAlignment="Top"
-                Command="{Binding Path=AddButtonClick}" />
+                Command="{Binding Path=AddButtonClick}" 
+                Height="40" 
+                Width="50" 
+                Grid.Column="1" 
+                Background="#FFB8CFAB">
+            <Image Source="/Resources/Icons/add.png" Stretch="Uniform"/>
+        </Button>
+
+        <Button 
+            HorizontalAlignment="Left"
+            Margin="674,10,0,452"
+            Padding="5" 
+            Grid.Column="1" 
+            Width="40" 
+            Background="#FFB8D6AB"
+            Click="Close_Window">
+            <Image Source="/Resources/Icons/Close.png" Stretch="Uniform"/>
+        </Button>
+
         <ListBox ItemsSource="{Binding CurrentCollection}"
-                 Margin="10,35,10,10">
+                 Margin="20,70,116,50" 
+                 Grid.ColumnSpan="2" 
+                 Background="#FFFEF2C9" 
+                 FontSize="16" 
+                 d:ItemsSource="{d:SampleData ItemCount=2}" BorderBrush="#FFB89470">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <uc:CommentUc CurrentClass="{Binding}" />
+                    <UniformGrid Rows="1">
+                        <TextBlock Text="{Binding Description}"/>
+                        <TextBlock Text="{Binding CreationTime}"/>
+                        <!--<uc:CommentUc CurrentClass="{Binding}"/>-->
+                    </UniformGrid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Command="{Binding LoadCommand}"
-                HorizontalAlignment="Left"
-                Margin="767,10,0,0"
-                VerticalAlignment="Top"
-                Width="23"
-                Height="23" />
+        <Button Command="{Binding LoadCommand}" 
+                HorizontalAlignment="Left" 
+                Margin="636,404,0,0" 
+                VerticalAlignment="Top" 
+                Width="58" 
+                Height="46" 
+                Grid.Column="2" 
+                Background="#FFB8CCAB" BorderThickness="1,1,1,1">
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="10" Background="{TemplateBinding Background}">
+                        <Image Source="/Resources/Icons/refresh.png" Stretch="Uniform"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

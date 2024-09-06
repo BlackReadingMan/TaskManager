@@ -9,7 +9,7 @@
                    xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                    xmlns:vm="clr-namespace:TaskManager.ViewModels.DialogViewModels"
                    mc:Ignorable="d"
-                   Title="AddCommentWindow"
+                   Title="Добавить комментарий"
                    Height="158"
                    Width="461">
     <Window.DataContext>

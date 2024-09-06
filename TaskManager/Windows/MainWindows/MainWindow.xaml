@@ -8,7 +8,7 @@
         xmlns:uc="clr-namespace:TaskManager.UserControls"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="Менеджер задач"
         Height="450"
         Width="800">
     <Window.DataContext>
@@ -62,7 +62,6 @@
         <ComboBox HorizontalAlignment="Left"
                   Margin="253,44,0,0"
                   VerticalAlignment="Top"
-                  Width="120"
                   SelectedIndex="{Binding Sorter.SelectedSortDirection}"
                   ItemsSource="{Binding Sorter.SortDirection}" />
         <ListBox SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
@@ -70,9 +69,7 @@
                  ItemsSource="{Binding CurrentCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
                         <uc:TaskUc CurrentClass="{Binding}" />
-                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

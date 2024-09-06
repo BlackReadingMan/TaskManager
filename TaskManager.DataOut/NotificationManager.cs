@@ -12,7 +12,6 @@ public static class NotificationManager
 {
   private const string EmailSmtp = "smtp.office365.com";
   private const int SmtpPort = 587;
-  //нужно создать почту
   private const string Email = "TaskManagere@outlook.com";
   private const string Password = "JCW-XEr-F4x-t7Z";
   private const string Subject = "Изменение статуса задачи.";

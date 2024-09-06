@@ -8,7 +8,7 @@
                     xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                     xmlns:dialogViewModels="clr-namespace:TaskManager.ViewModels.DialogViewModels"
                     mc:Ignorable="d"
-                    Title="AddUserWindow"
+                    Title="Регистрация"
                     Height="450"
                     Width="513">
     <Window.DataContext>

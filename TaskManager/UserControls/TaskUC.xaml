@@ -8,8 +8,6 @@
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
                        mc:Ignorable="d"
-                       Height="137"
-                       Width="476"
                        MouseDoubleClick="TaskUc_OnMouseDoubleClick">
     <!--делает ламер-->
     <Grid>

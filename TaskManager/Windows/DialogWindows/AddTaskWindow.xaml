@@ -9,7 +9,7 @@
                    xmlns:vm="clr-namespace:TaskManager.ViewModels.DialogViewModels"
                    xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
                    mc:Ignorable="d"
-                   Title="AddTaskWindow"
+                   Title="Добавить задачу"
                    Height="450"
                    Width="513">
     <Window.DataContext>

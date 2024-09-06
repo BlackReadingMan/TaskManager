@@ -6,13 +6,18 @@ namespace TaskManager.ViewModels.DialogViewModels;
 
 internal class AddCommentWindowViewModel : DialogWindowViewModel<Comment>
 {
-  private string? _description;
+  private string _description = string.Empty;
   public string Description
   {
     set => this._description = value;
   }
   protected override void AddSubject()
   {
+    if (_description == string.Empty)
+    {
+      App.ShowError("Комментарий пуст");
+      return;
+    }
     var newComment = new Comment
     {
       Description = this._description,
@@ -24,6 +29,6 @@ internal class AddCommentWindowViewModel : DialogWindowViewModel<Comment>
 
   protected override bool CanAddExecute(object parameter)
   {
-    return this._description is not null && this._description != string.Empty && App.CurrentUser is not null;
+    return true;
   }
 }

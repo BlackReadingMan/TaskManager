@@ -9,11 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\add.png" />
+    <None Remove="Resources\Icons\Close.png" />
     <None Remove="Resources\Icons\png-transparent-hyperlink-icon-360-degree-rotation-arrow-text-photography-3d-arrows-thumbnail.png" />
+    <None Remove="Resources\Icons\refresh.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Icons\png-transparent-hyperlink-icon-360-degree-rotation-arrow-text-photography-3d-arrows-thumbnail.png" />
+    <Resource Include="Resources\Icons\add.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\Close.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\png-transparent-hyperlink-icon-360-degree-rotation-arrow-text-photography-3d-arrows-thumbnail.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Icons\refresh.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

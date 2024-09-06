@@ -63,9 +63,7 @@
                      BorderBrush="#FFB89470">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
                             <uc:CommentUc CurrentClass="{Binding}" />
-                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>

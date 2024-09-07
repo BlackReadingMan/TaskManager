@@ -42,10 +42,10 @@ public static class NotificationManager
 
   private static async Task NotifyResponsibleAsync(DB.Models.Task task, User changer)
   {
-    if (task.Responsible is null) 
+    if (task.Responsible is null)
       return;
     var user = await DBAPI.GetItem<User>(task.Responsible.Value);
-    if (user?.Email is null) 
+    if (user?.Email is null)
       return;
     using var mm = new MailMessage($"{user.Name} <{Email}>", $"{user.Email}");
     mm.Subject = $"{Subject}";

@@ -10,17 +10,17 @@ namespace TaskManager.Windows.MainWindows;
 /// </summary>
 public partial class CommentWindow : Window
 {
-    public CommentWindow(Task task)
-    {
-        this.InitializeComponent();
-        this.DataContext = new CommentWindowViewModel(task);
-    }
-    private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        if (e.ButtonState == MouseButtonState.Pressed)
+  public CommentWindow(Task task)
+  {
+    this.InitializeComponent();
+    this.DataContext = new CommentWindowViewModel(task);
+  }
+  private void Window_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+  {
+    if (e.ButtonState == MouseButtonState.Pressed)
 
-        {
-            DragMove();
-        }
+    {
+      this.DragMove();
     }
+  }
 }

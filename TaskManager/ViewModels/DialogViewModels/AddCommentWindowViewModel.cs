@@ -13,7 +13,7 @@ internal class AddCommentWindowViewModel : DialogWindowViewModel<Comment>
   }
   protected override void AddSubject()
   {
-    if (_description == string.Empty)
+    if (this._description == string.Empty)
     {
       App.ShowError("Комментарий пуст");
       return;

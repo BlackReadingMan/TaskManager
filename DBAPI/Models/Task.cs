@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskManager.DB.Enums;
-using TaskStatus = TaskManager.DB.Enums.TaskStatus;
 
 namespace TaskManager.DB.Models;
 
@@ -15,11 +13,11 @@ public partial class Task
 
   public DateOnly? Deadline { get; set; }
 
-  public TaskPriority Priority { get; set; }
+  public int Priority { get; set; }
 
   public int? Responsible { get; set; }
 
-  public TaskStatus Status { get; set; }
+  public int Status { get; set; }
 
   public DateOnly CreationTime { get; set; }
 

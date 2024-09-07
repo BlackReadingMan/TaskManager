@@ -21,7 +21,8 @@
         </Style>
     </Window.Style>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
-    <Grid>
+    <Grid
+        Background="#b8ccab">
         <Grid.RowDefinitions>
             <RowDefinition Height="166*" />
             <RowDefinition Height="51*" />
@@ -61,38 +62,44 @@
                    VerticalAlignment="Center" />
             <TextBox Grid.Row="0"
                      Grid.Column="1"
-                     FontSize="20"
                      HorizontalAlignment="Center"
                      TextWrapping="Wrap"
                      VerticalAlignment="Center"
                      Width="322"
-                     Height="36"
+                     Height="45"
+                     Padding="10 0"
+                     Style="{StaticResource DefaultTextBoxStyle}"
                      Text="{Binding Name, Mode=OneWayToSource}" />
             <TextBox Grid.Column="1"
                      HorizontalAlignment="Center"
                      Grid.Row="1"
-                     FontSize="20"
+                     Style="{StaticResource DefaultTextBoxStyle}"
                      TextWrapping="Wrap"
                      VerticalAlignment="Center"
                      Width="322"
-                     Height="36"
+                     Height="45"
+                     Padding="10 0"
                      Text="{Binding Login, Mode=OneWayToSource}" />
-            <TextBox FontSize="20"
-                     Grid.Column="1"
-                     HorizontalAlignment="Center"
-                     Grid.Row="2"
-                     VerticalAlignment="Center"
-                     Width="322"
-                     Height="36"
-                     Text="{Binding Password, Mode=OneWayToSource}" />
-            <TextBox FontSize="20"
-                     Grid.Column="1"
-                     HorizontalAlignment="Center"
-                     Grid.Row="3"
-                     VerticalAlignment="Center"
-                     Width="322"
-                     Height="46"
-                     Text="{Binding Email, Mode=OneWayToSource}" />
+            <TextBox
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Style="{StaticResource DefaultTextBoxStyle}"
+                Grid.Row="2"
+                Padding="10 0"
+                VerticalAlignment="Center"
+                Width="322"
+                Height="45"
+                Text="{Binding Password, Mode=OneWayToSource}" />
+            <TextBox
+                Style="{StaticResource DefaultTextBoxStyle}"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Grid.Row="3"
+                Padding="10 0"
+                VerticalAlignment="Center"
+                Width="322"
+                Height="45"
+                Text="{Binding Email, Mode=OneWayToSource}" />
         </Grid>
         <Button Content="Добавить"
                 FontSize="20"

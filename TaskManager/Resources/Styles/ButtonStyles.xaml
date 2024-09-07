@@ -10,7 +10,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border"
                             CornerRadius="10"
-                            Padding="40 10"
+                            Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"/>

@@ -22,21 +22,34 @@
             <b:InvokeCommandAction Command="{Binding FilterMouseLostClick}" />
         </b:EventTrigger>
     </b:Interaction.Triggers>
-    <Grid>
-        <Button Content="Сформировать отчёт"
+    <Grid
+        Background="Cornsilk">
+        <Button Content="Сформировать отчет"
                 HorizontalAlignment="Left"
+                Width="150"
+                FontSize="10"
+                Style="{StaticResource DefaultButtonStyle}"
+                Padding=" 5"
                 Margin="10,10,0,0"
                 VerticalAlignment="Top"
                 Command="{Binding ReportButtonClick}" />
         <Button Content="Добавить задачу"
                 HorizontalAlignment="Left"
-                Margin="135,10,0,0"
+                Margin="175,10,0,0"
+                Width="150"
+                FontSize="10"
+                Style="{StaticResource DefaultButtonStyle}"
+                Padding=" 5"
                 VerticalAlignment="Top"
                 Command="{Binding AddButtonClick}" />
         <Button Content="Удалить задачу"
                 HorizontalAlignment="Left"
-                Margin="237,10,0,0"
+                Margin="337,10,0,0"
                 VerticalAlignment="Top"
+                Width="150"
+                FontSize="10"
+                Style="{StaticResource DefaultButtonStyle}"
+                Padding=" 5"
                 Command="{Binding RemoveButtonClick}" />
         <Button HorizontalAlignment="Left"
                 Margin="767,10,0,0"
@@ -44,16 +57,19 @@
                 Width="23"
                 Height="23"
                 Command="{Binding LoadCommand}" />
+
         <Label Content="Сортировать"
                HorizontalAlignment="Left"
                Margin="10,42,0,0"
                VerticalAlignment="Top" />
-        <ComboBox HorizontalAlignment="Left"
-                  Margin="96,44,0,0"
-                  VerticalAlignment="Top"
-                  Width="120"
-                  SelectedIndex="{Binding Sorter.SelectedSortParameter}"
-                  ItemsSource="{Binding Sorter.SortParameters}" />
+     
+            <ComboBox HorizontalAlignment="Left"
+                      Margin="96,44,0,0"
+                      VerticalAlignment="Top"
+                      FontSize="10"
+                      Width="120"
+                      SelectedIndex="{Binding Sorter.SelectedSortParameter}"
+                      ItemsSource="{Binding Sorter.SortParameters}" />
         <Label Content="по:"
                HorizontalAlignment="Left"
                Margin="221,42,0,0"
@@ -62,27 +78,31 @@
         <ComboBox HorizontalAlignment="Left"
                   Margin="253,44,0,0"
                   VerticalAlignment="Top"
+                  FontSize="10"
                   SelectedIndex="{Binding Sorter.SelectedSortDirection}"
                   ItemsSource="{Binding Sorter.SortDirection}" />
         <ListBox SelectedItem="{Binding SelectedTask, Mode=OneWayToSource}"
+                 Background="#FEECC9"
                  Margin="10,73,10,10"
                  ItemsSource="{Binding CurrentCollection}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                        <uc:TaskUc CurrentClass="{Binding}" />
+                    <uc:TaskUc CurrentClass="{Binding}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <Expander IsExpanded="{Binding IsFilterExpanded}"
                   HorizontalAlignment="Left"
                   Header="Фильтры"
-                  Margin="626,44,0,0"
+                  FontSize="10"
+                  FontWeight="Normal"
+                  Margin="626,34,0,0"
                   VerticalAlignment="Top"
                   Width="152">
-            <StackPanel Background="#FFE5E5E5">
+            <StackPanel Background="#b8ccab">
                 <Expander Header="Статус">
                     <ListBox ItemsSource="{Binding Sorter.StatusFilters}"
-                             Background="#FFE5E5E5">
+                             Background="#b8ccab">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -95,7 +115,7 @@
                 </Expander>
                 <Expander Header="Приоритет">
                     <ListBox ItemsSource="{Binding Sorter.PriorityFilters}"
-                             Background="#FFE5E5E5">
+                             Background="#b8ccab">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -118,16 +138,20 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="От"
                                Grid.Row="0"
-                               Grid.Column="0"></Label>
+                               Grid.Column="0">
+                        </Label>
                         <Label Content="До"
                                Grid.Row="1"
-                               Grid.Column="0"></Label>
+                               Grid.Column="0">
+                        </Label>
                         <DatePicker Grid.Row="0"
                                     Grid.Column="1"
-                                    SelectedDate="{Binding Sorter.FromCreationTime}"></DatePicker>
+                                    SelectedDate="{Binding Sorter.FromCreationTime}">
+                        </DatePicker>
                         <DatePicker Grid.Row="1"
                                     Grid.Column="1"
-                                    SelectedDate="{Binding Sorter.ToCreationTime}"></DatePicker>
+                                    SelectedDate="{Binding Sorter.ToCreationTime}">
+                        </DatePicker>
                     </Grid>
                 </Expander>
                 <Expander Header="Дедлайн">
@@ -142,24 +166,35 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="От"
                                Grid.Row="0"
-                               Grid.Column="0"></Label>
+                               Grid.Column="0">
+                        </Label>
                         <Label Content="До"
                                Grid.Row="1"
-                               Grid.Column="0"></Label>
+                               Grid.Column="0">
+                        </Label>
                         <DatePicker Grid.Row="0"
                                     Grid.Column="1"
-                                    SelectedDate="{Binding Sorter.FromDeadLine}"></DatePicker>
+                                    SelectedDate="{Binding Sorter.FromDeadLine}">
+                        </DatePicker>
                         <DatePicker Grid.Row="1"
                                     Grid.Column="1"
-                                    SelectedDate="{Binding Sorter.ToDeadLine}"></DatePicker>
+                                    SelectedDate="{Binding Sorter.ToDeadLine}">
+                        </DatePicker>
                     </Grid>
                 </Expander>
                 <Button Content="Применить"
                         Height="20"
-                        Command="{Binding Sorter.FilterSetButtonClick}"></Button>
+                        Style="{StaticResource DefaultButtonStyle}"
+                        FontSize="10"
+
+                        Command="{Binding Sorter.FilterSetButtonClick}">
+                </Button>
                 <Button Content="Сбросить"
                         Height="20"
-                        Command="{Binding Sorter.FilterResetButtonClick}"></Button>
+                        Style="{StaticResource DefaultButtonStyle}"
+                        FontSize="10"
+                        Command="{Binding Sorter.FilterResetButtonClick}">
+                </Button>
             </StackPanel>
         </Expander>
     </Grid>

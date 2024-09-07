@@ -3,7 +3,6 @@
 
     <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
         <Setter Property="Width" Value="500"/>
-        <Setter Property="Height" Value="70"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Padding" Value="10,5"/>
         <Setter Property="BorderThickness" Value="2"/>
@@ -16,7 +15,7 @@
                     <Border 
                         x:Name="border"
                         CornerRadius="15"
-                        Padding="5"
+                        Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">

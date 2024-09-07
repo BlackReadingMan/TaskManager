@@ -26,8 +26,12 @@
                     Value="{Binding DialogResult}" />
         </Style>
     </Window.Style>
+    <Window.Background>
+        <SolidColorBrush Color="Cornsilk"/>
+    </Window.Background>
     <!--Какого-то ***** компилятора это работает но выдаёт ошибку, раскомментировать только для дебага.-->
-    <Grid>
+    <Grid
+        Background="Cornsilk">
         <Grid.RowDefinitions>
             <RowDefinition Height="166*" />
             <RowDefinition Height="51*" />
@@ -73,21 +77,24 @@
                    Grid.Row="4"
                    VerticalAlignment="Center" />
             <TextBox Grid.Row="0"
+                     Style="{StaticResource  DefaultTextBoxStyle}"
                      Grid.Column="1"
-                     FontSize="20"
                      HorizontalAlignment="Center"
                      TextWrapping="Wrap"
                      VerticalAlignment="Center"
                      Width="322"
-                     Height="36"
+                     Height="46"
+                     Padding="10 0"
                      Text="{Binding Name, Mode=OneWayToSource}" />
-            <TextBox Grid.Column="1"
+            <TextBox Style="{StaticResource  DefaultTextBoxStyle}"
+                     Grid.Column="1"
                      HorizontalAlignment="Center"
                      Grid.Row="1"
                      TextWrapping="Wrap"
+                     Padding="10 0"
                      VerticalAlignment="Center"
                      Width="322"
-                     Height="63"
+                     Height="66"
                      Text="{Binding Description, Mode=OneWayToSource}" />
             <DatePicker FontSize="20"
                         Grid.Column="1"
@@ -119,6 +126,7 @@
         </Grid>
         <Button Content="Добавить"
                 FontSize="20"
+                Style="{StaticResource DefaultButtonStyle}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
                 Grid.Row="1"

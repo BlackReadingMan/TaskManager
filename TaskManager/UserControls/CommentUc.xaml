@@ -6,8 +6,7 @@
                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                        xmlns:userControls="clr-namespace:TaskManager.UserControls"
                        xmlns:models="clr-namespace:TaskManager.DB.Models;assembly=TaskManager.DB"
-                       mc:Ignorable="d"
-                       Width="545">
+                       mc:Ignorable="d">
     <!--делает ламер-->
     <Grid>
         <Label x:Name="CreatorLogin"
